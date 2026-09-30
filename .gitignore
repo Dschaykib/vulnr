@@ -1,0 +1,12 @@
+# R project files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# MAC files
+*.DS_Store
+
+# folder for testing renv versions
+*renv-lockfiles/

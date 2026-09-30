@@ -1,0 +1,148 @@
+# script to create the DESCRIPTION file
+
+# Remove default DESC and NEWS.md
+unlink("DESCRIPTION")
+unlink("NEWS.md")
+
+{
+  library(renv)
+  library(desc)
+  library(newsmd)
+  library(lintr)
+  library(origin)
+  library(roxygen2)
+  library(devtools)
+  library(Rd2md)
+  library(knitr)
+  library(usethis)
+  library(covr)
+}
+
+
+# initial files -----------------------------------------------------------
+{
+  # Create a new description object
+  my_desc <- desc::description$new("!new")
+  my_news <- newsmd::newsmd()
+
+  # Set your package name
+  my_desc$set("Package", "vulr")
+  # Set license
+  my_desc$set("License", "MIT + file LICENSE")
+
+  # Remove some author fields
+  my_desc$del("Maintainer")
+  # Set the version
+  my_desc$set_version("0.0.0.9000")
+  # The title of your package
+  my_desc$set(Title = "Vulnerability Scans")
+  # The description of your package
+  my_desc$set(Description =
+                paste0("Scan R projects for vulnerabilities."))
+  # The urls
+  my_desc$set("URL", "https://github.com/Dschaykib/vulr")
+  my_desc$set("BugReports",
+              "https://github.com/Dschaykib/vulr/issues")
+
+
+  #Set authors
+  my_desc$set("Authors@R",
+              paste0("person('Jakob', 'Gepp',",
+                     "email = 'jakob.gepp@yahoo.com',",
+                     "role = c('cre', 'aut'))"))
+
+  # set R version
+  my_desc$set_dep("R", type = desc::dep_types[2], version = ">= 4.5")
+
+  # set suggests desc::dep_types[3]
+  my_desc$set_dep("testthat", type = desc::dep_types[3], version = "*")
+
+  # initial setup -------------------------------------------------------
+
+  my_desc$bump_version("dev")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c("adding newsmd for easier creation of NEWS.md file",
+                       "inital package setup"))
+
+  my_desc$set_dep("data.table", type = desc::dep_types[1], version = "*")
+  my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = "*")
+  my_desc$set_dep("httr", type = desc::dep_types[1], version = "*")
+
+}
+
+
+# get vulnerabilities -----------------------------------------------------
+
+vuls_num <- sum(0)
+vuls_status <- ifelse(vuls_num == 0, "success", "red")
+
+# save everything ---------------------------------------------------------
+
+{
+  my_desc$set("Date", Sys.Date())
+  my_desc$write(file = "DESCRIPTION")
+  my_news$write(file = "NEWS.md")
+
+  # set pkg version number in README
+  my_readme <- readLines("README.md")
+  my_readme[1] <- paste0("# vulr - ", my_desc$get_version(),
+    " <img src=\"misc/logo.png\" width=170 align=\"right\" />")
+  # set dev version number
+  my_readme <- gsub(pattern = "badge/Version-.*-success",
+                    replacement = paste0("badge/Version-",
+                                         my_desc$get_version(),
+                                         "-success"),
+                    x = my_readme)
+  # set vulnerabilities
+  vuls_idx <- grep(pattern = "\\| vulnerabilities \\|", x = my_readme)
+  my_readme[vuls_idx] <- paste0(
+    "| vulnerabilities | - | ![vulnerabilities]",
+    "(https://img.shields.io/badge/vulnerabilities-",
+    vuls_num, "-", vuls_status, ") |"
+  )
+
+
+  writeLines(my_readme, "README.md")
+
+  # set pkg names
+  misc_files <- list.files(paste0(getwd(), "/misc"),
+                           full.names = TRUE,
+                           pattern = "\\.R$")
+  # remove old docs
+  file.remove(list.files("man", full.names = TRUE))
+}
+
+origin::originize_pkg(exclude_files = misc_files)
+
+# check linting
+lintr::lint_package()
+
+
+# update documentation
+roxygen2::roxygenise()
+
+
+# tidy DESCRIPTON
+usethis::use_tidy_description()
+
+# update renv packages if needed
+# looks like there is some weird error with renv:clean
+# where not all needed packges are detected
+renv::clean()
+renv::snapshot(prompt = TRUE, dev = TRUE, type = "all")
+
+
+# tests and build ---------------------------------------------------------
+
+
+# click the 'Clean & Install' button in the "Build"-Tab under "More"
+
+# tests take a while
+devtools::test()
+# to see where tests are missing
+covr::package_coverage()
+
+# check package structure
+devtools::check(document = FALSE)
+
