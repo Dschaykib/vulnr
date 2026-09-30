@@ -30,19 +30,19 @@ pak::pak("your-org/vulr")
 
 ## TODO
 
-[x] tests with all renv versions to get packages
-[ ] get packages from DESCRIPTION
-[x] get installed packages
-[ ] test when no version of package is available
-[x] make nice print out
-[x] create functions
-[ ] create tests
-[x] check API rate limits -> no limits stated in the osv docs
-[x] add API error handling
-[ ] test other ecosystem than CRAN
-[ ] include CVSS_V2, CVSS_V4, ubuntu  see: https://ossf.github.io/osv-schema/#severity-field
-[x] set warning and error level based on severity, like choose a minumum severity for error and warning
-[ ] check next_page_token from osv
+- [x] tests with all renv versions to get packages
+- [ ] get packages from DESCRIPTION
+- [x] get installed packages
+- [ ] test when no version of package is available
+- [x] make nice print out
+- [x] create functions
+- [ ] create tests
+- [x] check API rate limits -> no limits stated in the osv docs
+- [x] add API error handling
+- [ ] test other ecosystem than CRAN
+- [ ] include CVSS_V2, CVSS_V4, ubuntu  see: https://ossf.github.io/osv-schema/#severity-field
+- [x] set warning and error level based on severity, like choose a minumum severity for error and warning
+- [ ] check next_page_token from osv
 
 
 ## License
