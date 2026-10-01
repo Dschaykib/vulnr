@@ -2,7 +2,9 @@
 #'
 #' @param x Data frame containing vulnerability findings.
 #' @param group Logical; group findings by package when `TRUE`.
-#' @return A single character string containing the formatted report.
+#' @param refs Character vector of source paths referenced by the findings.
+#' @return A list with `summary` and `details` strings, or a single clean-result
+#'   string when there are no findings.
 #' @keywords internal
 format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
   stopifnot(is.data.frame(x) || is.null(x))

@@ -1,5 +1,5 @@
 
-renv::install(c("pak", "callr"))
+#renv::install(c("pak", "callr"))
 
 package <- "renv"
 test_package <- "jsonlite"
@@ -69,6 +69,25 @@ get_cran_versions <- function(package) {
 # Create lockfile for one renv version
 # -------------------------------------------------------------------------
 
+clean_fixture_directory <- function(target, lockfile, version) {
+  entries <- list.files(target, full.names = TRUE, all.files = TRUE,
+                        no.. = TRUE)
+  extras <- setdiff(normalizePath(entries, mustWork = FALSE),
+                    normalizePath(lockfile, mustWork = FALSE))
+
+  if (length(extras) > 0L) {
+    unlink(extras, recursive = TRUE, force = TRUE)
+  }
+
+  remaining <- list.files(target, full.names = TRUE, all.files = TRUE,
+                          no.. = TRUE)
+  if (length(remaining) != 1L ||
+      !identical(normalizePath(remaining, mustWork = FALSE),
+                 normalizePath(lockfile, mustWork = FALSE))) {
+    stop("Could not clean fixture directory for renv ", version)
+  }
+}
+
 create_lockfile <- function(
     version,
     output_dir,
@@ -79,15 +98,25 @@ create_lockfile <- function(
   target <- file.path(output_dir, version)
   lockfile <- file.path(target, "renv.lock")
 
-  # Makes rerunning the script cheap.
+  # Validate existing fixtures before skipping. A valid fixture is reduced to
+  # its lockfile so reruns do not retain renv's generated project files.
   if (file.exists(lockfile)) {
-    message(
-      "SKIP ",
-      version,
-      " (renv.lock already exists)"
+    lock_info <- tryCatch(
+      jsonlite::fromJSON(lockfile),
+      error = function(e) NULL
     )
+    installed_version <- lock_info$Packages$renv$Version
 
-    return("existing")
+    if (identical(as.character(installed_version), as.character(version))) {
+      clean_fixture_directory(target, lockfile, version)
+
+      message("SKIP ", version, " (validated renv.lock)")
+      return("existing")
+    }
+
+    message("Existing renv.lock for ", version,
+            " has the wrong renv version; regenerating fixture.")
+    unlink(target, recursive = TRUE, force = TRUE)
   }
 
   message("")
@@ -233,6 +262,8 @@ create_lockfile <- function(
     )
   }
 
+  clean_fixture_directory(target, lockfile, version)
+
   "success"
 }
 
@@ -292,19 +323,14 @@ test_renv <- function(version) {
         conditionMessage(e)
       )
 
-      # Remove incomplete fixture directory.
       target <- file.path(
         output_dir,
         version
       )
 
-      if (dir.exists(target)) {
-        unlink(
-          target,
-          recursive = TRUE,
-          force = TRUE
-        )
-      }
+      # Keep the directory as a marker for the failed version. The fixture
+      # tests report any version directory that does not contain renv.lock.
+      dir.create(target, recursive = TRUE, showWarnings = FALSE)
 
       data.frame(
         renv_version = version,
@@ -390,4 +416,3 @@ for (i_version in seq_along(versions)) {
     as.data.frame = FALSE
   )
 }
-

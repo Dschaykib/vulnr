@@ -69,6 +69,15 @@ unlink("NEWS.md")
   my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = "*")
   my_desc$set_dep("httr", type = desc::dep_types[1], version = "*")
 
+
+  # add functions -----------------------------------------------------------
+
+  my_desc$bump_version("minor")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c("add CVE check functions"))
+
+
 }
 
 

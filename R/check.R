@@ -8,7 +8,10 @@
 #' @param lib Character vector of library paths, or `NULL` to skip installed libraries.
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
+#' @param group Logical; if `TRUE`, group findings by package in the report.
+#'
 #' @return Invisibly returns `NULL`; reports findings with a warning or error.
+#'
 #' @importFrom data.table rbindlist
 #' @export
 check <- function(
@@ -22,7 +25,7 @@ check <- function(
 
   # validate inputs
   severity_levels <- c("CRITICAL", "HIGH", "MEDIUM", "LOW")
-  if (!error_level %in% severity_levels || length(error_level) != 1) {
+  if (length(error_level) != 1L || !error_level %in% severity_levels) {
     stop(
       paste0("'error_level' must be one of: ",
              paste0(severity_levels, collapse = ", ")
@@ -44,6 +47,11 @@ check <- function(
 
   if (!is.null(lib)) {
     inputs$lib <- parse_library(lib = lib)
+  }
+
+  if (length(inputs) == 0L) {
+    message("✔ No known vulnerabilities found.")
+    return(invisible(NULL))
   }
 
   inputs_all <- data.table::rbindlist(inputs)
@@ -78,7 +86,7 @@ check <- function(
     stop(msg$summary,call. = FALSE)
   }
 
-  if (!is.null(cves) || nrow(cves) != 0) {
+  if (!is.null(cves) && nrow(cves) != 0) {
     message(msg$details)
     warning(msg$summary, call. = FALSE)
   } else {

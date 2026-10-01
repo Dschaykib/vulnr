@@ -69,9 +69,6 @@ cvss31_score <- function(vector) {
   unname(score)
 }
 
-vector <- "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
-
-
 #' Convert a CVSS score to a severity label
 #'
 #' @param score Numeric CVSS score.
@@ -106,13 +103,3 @@ parse_cvss31 <- function(vector) {
     vector = vector
   )
 }
-
-parse_cvss31(vector)
-#> $severity
-#> [1] "CRITICAL"
-#>
-#> $score
-#> [1] 9.8
-#>
-#> $vector
-#> [1] "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
