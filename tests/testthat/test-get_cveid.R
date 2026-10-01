@@ -24,4 +24,13 @@ testthat::test_that("get_cveid extracts upstream IDs and fixed versions", {
   result <- get_cveid(input)
   testthat::expect_equal(result$upstream, "CVE-1")
   testthat::expect_equal(result$fix, "1.1")
+
+  empty_result <- get_cveid(data.table::data.table(
+    package = character(), installed = character(), id = character(),
+    fix = character()
+  ))
+  testthat::expect_equal(nrow(empty_result), 0)
+  testthat::expect_named(
+    empty_result, c("package", "installed", "id", "upstream", "fix")
+  )
 })

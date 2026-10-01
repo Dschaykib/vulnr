@@ -85,7 +85,8 @@ unlink("NEWS.md")
 
 # get vulnerabilities -----------------------------------------------------
 
-vuls_num <- sum(0)
+cves_dt <- vulr::check(lib = NULL, return_cves = TRUE)
+vuls_num <- nrow(cves_dt)
 vuls_status <- ifelse(vuls_num == 0, "success", "red")
 
 # save everything ---------------------------------------------------------

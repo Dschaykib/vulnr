@@ -32,16 +32,11 @@ check_packages <- function(check_data) {
   severity_dt <- get_severity(ids = unique(cve_dt$upstream))
 
 
-  if (nrow(severity_dt) > 0 && nrow(cve_dt) > 0) {
-    cves <- data.table::merge.data.table(
-      x = cve_dt,
-      y = severity_dt,
-      by = "upstream"
-    )
-  } else {
-    cves <- NULL
-  }
-
+  cves <- data.table::merge.data.table(
+    x = cve_dt,
+    y = severity_dt,
+    by = "upstream"
+  )
 
   return(cves)
 

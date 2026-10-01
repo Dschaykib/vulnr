@@ -10,8 +10,11 @@
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
 #' @param group Logical; if `TRUE`, group findings by package in the report.
+#' @param return_cves Logical; if `TRUE`, return the CVE data table instead of
+#'   reporting findings with a warning or error.
 #'
-#' @return Invisibly returns `NULL`; reports findings with a warning or error.
+#' @return Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,
+#'   returns the CVE data table.
 #'
 #' @importFrom data.table rbindlist
 #' @export
@@ -20,7 +23,8 @@ check <- function(
     renv_file = "renv.lock",
     lib = .libPaths(),
     error_level = "LOW",
-    group = TRUE) {
+    group = TRUE,
+    return_cves = FALSE) {
 
 
   # including for package build notes
@@ -35,6 +39,11 @@ check <- function(
         paste0(severity_levels, collapse = ", ")
       )
     )
+  }
+
+  if (!is.logical(return_cves) || length(return_cves) != 1L ||
+      is.na(return_cves)) {
+    stop("'return_cves' must be a single non-missing logical value")
   }
 
 
@@ -64,7 +73,6 @@ check <- function(
   check_data <- unique(inputs_all[, c("Package", "Version")])
   cves <- check_packages(check_data)
 
-
   # add path info back to cves
   cves_merged <- data.table::merge.data.table(
     x = cves,
@@ -85,6 +93,11 @@ check <- function(
     , list(ref = paste0("[", paste0(sort(path), collapse = ", "), "]")),
     by = names(cves)
   ]
+
+
+  if (return_cves) {
+    return(cves_full)
+  }
 
   # report CVEs
   msg <- format_vulnerabilities(cves_full, group = group, refs = path_info)

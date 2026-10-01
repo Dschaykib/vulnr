@@ -17,6 +17,27 @@ testthat::test_that("check can run with no sources", {
   testthat::expect_error(check(renv_file = NULL, lib = NULL), NA)
 })
 
+testthat::test_that("check handles no findings", {
+  empty_findings <- data.table::data.table(
+    package = character(), installed = character(), upstream = character(),
+    score = numeric(), severity = character(), fix = character(),
+    ref = character()
+  )
+  testthat::local_mocked_bindings(
+    check_packages = function(x) empty_findings, .package = "vulr"
+  )
+
+  testthat::expect_no_warning(
+    testthat::expect_message(
+      check(
+        data = data.frame(Package = "foo", Version = "1.0"),
+        renv_file = NULL, lib = NULL
+      ),
+      "No known vulnerabilities found"
+    )
+  )
+})
+
 testthat::test_that("check reports mocked vulnerabilities", {
   findings <- data.table::data.table(
     package = "foo", installed = "1.0", upstream = "CVE-1", score = 9.8,
@@ -32,4 +53,24 @@ testthat::test_that("check reports mocked vulnerabilities", {
     ),
     "Found 1 vulnerability"
   )
+})
+
+testthat::test_that("check can return mocked vulnerabilities", {
+  findings <- data.table::data.table(
+    package = "foo", installed = "1.0", upstream = "CVE-1", score = 9.8,
+    severity = "CRITICAL", fix = "1.1"
+  )
+  testthat::local_mocked_bindings(
+    check_packages = function(x) findings, .package = "vulr"
+  )
+
+  result <- check(
+    data = data.frame(Package = "foo", Version = "1.0"),
+    renv_file = NULL,
+    lib = NULL,
+    return_cves = TRUE
+  )
+
+  findings$ref <- "[1]"
+  testthat::expect_equal(result, findings)
 })

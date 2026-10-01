@@ -6,7 +6,18 @@
 #' @keywords internal
 get_cveid <- function(resc_dt) {
 
+  empty_result <- data.table::data.table(
+    package = character(),
+    installed = character(),
+    id = character(),
+    upstream = character(),
+    fix = character()
+  )
+
+  # initialize list with at least one empty result
   cve_list <- vector(mode = "list", length = nrow(resc_dt))
+  cve_list[[1]] <- empty_result
+
   for (i_row in seq_along(resc_dt$id)) {
 
     i_id <- resc_dt$id[i_row]
@@ -32,6 +43,7 @@ get_cveid <- function(resc_dt) {
     cve_list[[i_id]] <- out
 
   }
+
 
   cve_dt <- data.table::rbindlist(cve_list, fill = TRUE, use.names = TRUE)
 

@@ -7,10 +7,18 @@
 #' @keywords internal
 get_rsecid <- function(body_list, results) {
 
+  empty_result <- data.table::data.table(
+    package = character(),
+    installed = character(),
+    id = character(),
+    fix = character()
+  )
+
   i_res <- 4
   resc_list <- vector(mode = "list", length = length(results))
   for (i_res in seq_along(results)) {
     if (length(results[[i_res]]) == 0) {
+      resc_list[[i_res]] <- empty_result
       next()
     }
     this_pkg <- body_list$queries[[i_res]]$package$name
@@ -26,6 +34,7 @@ get_rsecid <- function(body_list, results) {
       fix = NA_character_
     )
   }
+
 
   resc_dt <- data.table::rbindlist(resc_list, fill = TRUE, use.names = TRUE)
   return(resc_dt)

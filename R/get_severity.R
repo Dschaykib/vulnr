@@ -6,7 +6,15 @@
 #' @keywords internal
 get_severity <- function(ids) {
 
+  empty_result <- data.table::data.table(
+    upstream = character(),
+    score = numeric(),
+    severity = character()
+  )
+
+  # initialize list with at least one empty result
   id_list <- vector(mode = "list", length = length(ids))
+  id_list[[1]] <- empty_result
 
   i_id <- ids[1]
   for (i_id in ids) {
