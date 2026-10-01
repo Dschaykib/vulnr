@@ -2,13 +2,15 @@
 #'
 #' @param vector A CVSS 3.1 vector string.
 #' @return A numeric score between 0 and 10.
+#'
+#' @importFrom stats setNames
 #' @keywords internal
 cvss31_score <- function(vector) {
   # Remove prefix and parse metrics
   vector <- sub("^CVSS:3\\.1/", "", vector)
   parts <- strsplit(vector, "/", fixed = TRUE)[[1]]
 
-  metrics <- setNames(
+  metrics <- stats::setNames(
     sub("^[^:]+:", "", parts),
     sub(":.*$", "", parts)
   )

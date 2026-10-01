@@ -2,6 +2,7 @@
 #'
 #' @param lib Character vector of existing library paths.
 #' @return A data frame of installed packages and their source paths.
+#' @importFrom utils installed.packages
 #' @keywords internal
 parse_library <- function(lib = .libPaths()) {
 
@@ -22,7 +23,7 @@ parse_library <- function(lib = .libPaths()) {
     )
   }
 
-  pkgs <- installed.packages(lib.loc = lib)
+  pkgs <- utils::installed.packages(lib.loc = lib)
 
   out <- normalize_packages(
     data.frame(

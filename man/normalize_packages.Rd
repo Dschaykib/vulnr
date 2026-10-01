@@ -7,10 +7,13 @@
 normalize_packages(x)
 }
 \arguments{
-\item{x}{Data frame with `Package` and `Version` columns.}
+\item{x}{A data frame with `Package` and `Version` columns, or a character
+vector of package names. A missing or empty version is treated as an
+unversioned package query.}
 }
 \value{
-A normalized data frame with `Package`, `Version`, `source`, and `path` columns.
+A normalized data frame with `Package`, `Version`, `source`,
+ and `path` columns.
 }
 \description{
 Normalize package data

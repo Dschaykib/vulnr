@@ -4,15 +4,18 @@
 \alias{format_vulnerabilities}
 \title{Format vulnerability findings for display}
 \usage{
-format_vulnerabilities(x = NULL, group = TRUE)
+format_vulnerabilities(x = NULL, group = TRUE, refs = c())
 }
 \arguments{
 \item{x}{Data frame containing vulnerability findings.}
 
 \item{group}{Logical; group findings by package when `TRUE`.}
+
+\item{refs}{Character vector of source paths referenced by the findings.}
 }
 \value{
-A single character string containing the formatted report.
+A list with `summary` and `details` strings, or a single clean-result
+  string when there are no findings.
 }
 \description{
 Format vulnerability findings for display

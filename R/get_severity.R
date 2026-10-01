@@ -6,8 +6,6 @@
 #' @keywords internal
 get_severity <- function(ids) {
 
-  # Example: ids <- "CVE-2023-46308"
-
   id_list <- vector(mode = "list", length = length(ids))
 
   i_id <- ids[1]

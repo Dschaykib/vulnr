@@ -68,6 +68,8 @@ unlink("NEWS.md")
   my_desc$set_dep("data.table", type = desc::dep_types[1], version = "*")
   my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = "*")
   my_desc$set_dep("httr", type = desc::dep_types[1], version = "*")
+  my_desc$set_dep("stats", type = desc::dep_types[1], version = "*")
+  my_desc$set_dep("utils", type = desc::dep_types[1], version = "*")
 
 
   # add functions -----------------------------------------------------------

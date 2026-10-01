@@ -5,7 +5,8 @@
 #'
 #' @param data Optional data frame with `Package` and `Version` columns.
 #' @param renv_file Path to an `renv.lock` file, or `NULL` to skip it.
-#' @param lib Character vector of library paths, or `NULL` to skip installed libraries.
+#' @param lib Character vector of library paths, or `NULL` to skip
+#' installed libraries.
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
 #' @param group Logical; if `TRUE`, group findings by package in the report.
@@ -19,16 +20,19 @@ check <- function(
     renv_file = "renv.lock",
     lib = .libPaths(),
     error_level = "LOW",
-    group = TRUE
-) {
+    group = TRUE) {
 
+
+  # including for package build notes
+  path <- NULL
 
   # validate inputs
   severity_levels <- c("CRITICAL", "HIGH", "MEDIUM", "LOW")
   if (length(error_level) != 1L || !error_level %in% severity_levels) {
     stop(
-      paste0("'error_level' must be one of: ",
-             paste0(severity_levels, collapse = ", ")
+      paste0(
+        "'error_level' must be one of: ",
+        paste0(severity_levels, collapse = ", ")
       )
     )
   }
@@ -50,7 +54,7 @@ check <- function(
   }
 
   if (length(inputs) == 0L) {
-    message("✔ No known vulnerabilities found.")
+    message("No known vulnerabilities found.")
     return(invisible(NULL))
   }
 
@@ -70,9 +74,17 @@ check <- function(
   )
 
   path_info <- sort(unique(cves_merged$path))
-  cves_merged[, path :=  as.numeric(factor(x = cves_merged$path, levels = path_info))]
-  cves_full <- cves_merged[, list(ref = paste0("[", paste0(sort(path), collapse = ", "), "]")),
-            by = names(cves)]
+  cves_merged$path <- as.numeric(
+    factor(
+      x = cves_merged$path,
+      levels = path_info
+    )
+  )
+
+  cves_full <- cves_merged[
+    , list(ref = paste0("[", paste0(sort(path), collapse = ", "), "]")),
+    by = names(cves)
+  ]
 
   # report CVEs
   msg <- format_vulnerabilities(cves_full, group = group, refs = path_info)
@@ -83,7 +95,7 @@ check <- function(
 
   if (any(severity_idx <= error_idx)) {
     message(msg$details)
-    stop(msg$summary,call. = FALSE)
+    stop(msg$summary, call. = FALSE)
   }
 
   if (!is.null(cves) && nrow(cves) != 0) {

@@ -1,11 +1,11 @@
-# vulr - 0.0.0.9001 <img src="misc/logo.png" width=170 align="right" />
+# vulr - 0.1.0 <img src="misc/logo.png" width=170 align="right" />
 
 | branch        | master | dev  |
 | ------------- | ------ | ---- |
 | R CMD check   | [![master-branch](https://github.com/Dschaykib/newsmd/workflows/R-CMD-check-fix/badge.svg?branch=master)](https://github.com/Dschaykib/newsmd/actions?query=workflow%3AR-CMD-check-fix+branch%3Amaster) | [![dev-branch](https://github.com/Dschaykib/newsmd/workflows/R-CMD-check-fix/badge.svg?branch=dev)](https://github.com/Dschaykib/newsmd/actions?query=workflow%3AR-CMD-check-fix+branch%3Adev) |
 | test coverage | [![master-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/newsmd/master.svg)](https://codecov.io/gh/Dschaykib/newsmd/branch/master) | [![dev-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/newsmd/dev.svg)](https://codecov.io/gh/Dschaykib/newsmd/branch/dev) |
 | lints         | [![master-lints](https://github.com/Dschaykib/newsmd/workflows/lints/badge.svg?branch=master)](https://github.com/Dschaykib/newsmd/actions?query=workflow%3Alints+branch%3Amaster) | [![dev-lints](https://github.com/Dschaykib/newsmd/workflows/lints/badge.svg?branch=dev)](https://github.com/Dschaykib/newsmd/actions?query=workflow%3Alints+branch%3Adev) |
-| CRAN | [![CRAN](https://www.r-pkg.org/badges/version/vulr)](https://cran.r-project.org/web/packages/vulr/index.html) | ![DevVersion](https://img.shields.io/badge/Version-0.0.0.9001-success) |
+| CRAN | [![CRAN](https://www.r-pkg.org/badges/version/vulr)](https://cran.r-project.org/web/packages/vulr/index.html) | ![DevVersion](https://img.shields.io/badge/Version-0.1.0-success) |
 | vulnerabilities | - | ![vulnerabilities](https://img.shields.io/badge/vulnerabilities-0-success) |
 
 ----

@@ -1,7 +1,7 @@
-test_that("format_vulnerabilities handles empty, grouped, and flat output", {
-  expect_equal(
+testthat::test_that("it handles empty, grouped, and flat output", {
+  testthat::expect_equal(
     format_vulnerabilities(NULL),
-    "✔ No known vulnerabilities found."
+    "No known vulnerabilities found."
   )
   x <- data.frame(
     package = c("b", "a"),
@@ -14,12 +14,12 @@ test_that("format_vulnerabilities handles empty, grouped, and flat output", {
   )
   grouped <- format_vulnerabilities(x, refs = c("path-a", "path-b"))
 
-  expect_named(grouped, c("summary", "details"))
-  expect_match(grouped$summary, "2 vulnerabilities in 2 packages")
+  testthat::expect_named(grouped, c("summary", "details"))
+  testthat::expect_match(grouped$summary, "2 vulnerabilities in 2 packages")
 
   res <- format_vulnerabilities(x, group = FALSE)
-  expect_match(res$details, "Package")
-  expect_match(res$details, "CVE-1")
-  expect_match(res$details, "CVE-2")
+  testthat::expect_match(res$details, "Package")
+  testthat::expect_match(res$details, "CVE-1")
+  testthat::expect_match(res$details, "CVE-2")
 
 })

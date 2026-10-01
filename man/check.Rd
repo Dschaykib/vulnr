@@ -8,7 +8,8 @@ check(
   data = NULL,
   renv_file = "renv.lock",
   lib = .libPaths(),
-  error_level = "LOW"
+  error_level = "LOW",
+  group = TRUE
 )
 }
 \arguments{
@@ -16,10 +17,13 @@ check(
 
 \item{renv_file}{Path to an `renv.lock` file, or `NULL` to skip it.}
 
-\item{lib}{Character vector of library paths, or `NULL` to skip installed libraries.}
+\item{lib}{Character vector of library paths, or `NULL` to skip
+installed libraries.}
 
 \item{error_level}{Minimum severity that causes an error. One of `CRITICAL`,
 `HIGH`, `MEDIUM`, or `LOW`.}
+
+\item{group}{Logical; if `TRUE`, group findings by package in the report.}
 }
 \value{
 Invisibly returns `NULL`; reports findings with a warning or error.

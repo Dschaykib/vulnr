@@ -3,7 +3,8 @@
 #' @param x A data frame with `Package` and `Version` columns, or a character
 #'   vector of package names. A missing or empty version is treated as an
 #'   unversioned package query.
-#' @return A normalized data frame with `Package`, `Version`, `source`, and `path` columns.
+#' @return A normalized data frame with `Package`, `Version`, `source`,
+#'  and `path` columns.
 #' @keywords internal
 normalize_packages <- function(x) {
 

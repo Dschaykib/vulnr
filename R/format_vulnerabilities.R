@@ -11,7 +11,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
   stopifnot(is.logical(group), length(group) == 1L, !is.na(group))
 
   if (is.null(x) || nrow(x) == 0L) {
-    return("✔ No known vulnerabilities found.")
+    return("No known vulnerabilities found.")
   }
 
   severity_order <- c(
@@ -35,7 +35,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
 
   # Header
   header <- sprintf(
-    "✖ Found %d vulnerabilit%s in %d package%s",
+    "Found %d vulnerabilit%s in %d package%s",
     n_vulns,
     if (n_vulns == 1L) "y" else "ies",
     n_packages,
@@ -191,7 +191,8 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
     summary = paste0(
       header,
       "\n",
-      info),
+      info
+    ),
     details = paste0(
       cve_block,
       "\n\n",

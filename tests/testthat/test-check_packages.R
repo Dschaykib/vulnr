@@ -1,4 +1,4 @@
-test_that("check_packages combines mocked OSV responses", {
+testthat::test_that("check_packages combines mocked OSV responses", {
   responses <- list(
     list(results = list(list(vulns = list(list(id = "RSEC-1"))))),
     list(
@@ -12,7 +12,7 @@ test_that("check_packages combines mocked OSV responses", {
     )
   )
   calls <- 0L
-  local_mocked_bindings(
+  testthat::local_mocked_bindings(
     api_request = function(...) {
       calls <<- calls + 1L
       if (calls == 1L) responses[[1L]] else responses[[2L]]
@@ -20,7 +20,7 @@ test_that("check_packages combines mocked OSV responses", {
     .package = "vulr"
   )
   result <- check_packages(data.frame(Package = "foo", Version = "1.0"))
-  expect_equal(result$upstream, "CVE-1")
-  expect_equal(result$severity, "CRITICAL")
-  expect_equal(result$fix, "1.1")
+  testthat::expect_equal(result$upstream, "CVE-1")
+  testthat::expect_equal(result$severity, "CRITICAL")
+  testthat::expect_equal(result$fix, "1.1")
 })

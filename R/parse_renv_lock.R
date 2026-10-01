@@ -6,7 +6,6 @@
 #' @importFrom jsonlite fromJSON
 #' @keywords internal
 parse_renv_lock <- function(renv_file = "renv.lock") {
-  #renv_file <- c("renv-lockfiles/0.12.1/renv.lock", "renv-lockfiles/0.12.5/renv.lock")
 
   out_list <- vector(mode = "list", length = length(renv_file))
 
@@ -20,7 +19,6 @@ parse_renv_lock <- function(renv_file = "renv.lock") {
     res_list <- lapply(
       X = renv_info,
       FUN = function(x) {
-        # x <- renv_info[[1]]
         data.table::data.table(
           Package = x$Package,
           Version = x$Version
