@@ -15,6 +15,9 @@ get_rsecid <- function(body_list, results) {
     }
     this_pkg <- body_list$queries[[i_res]]$package$name
     this_version <- body_list$queries[[i_res]]$version
+    if (is.null(this_version)) {
+      this_version <- NA_character_
+    }
 
     resc_list[[i_res]] <- data.table::data.table(
       package = this_pkg,

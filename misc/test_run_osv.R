@@ -4,6 +4,10 @@ data <- check_data <- data.frame(
   Package = c("ggplot2", "gdata", "commonmark", "gh"),
   Version = c("3.1.1", "2.16.1", "1.0", "1.5.0")
 )
+data <- data.frame(
+  Package = c("commonmark"),
+  Version = NA_character_
+)
 
 
 check_data <- data.frame(
@@ -166,3 +170,14 @@ if (!is.null(cves) || nrow(cves) != 0) {
 
 
 
+
+# -------------------------------------------------------------------------
+data <- data.frame(
+  Package = c("commonmark", "gh"),
+  Version = c("1.7", NA_character_)
+)
+
+data <- c("commonmark", "gh")
+
+aa <- check(data = data, renv_file = NULL, lib = NULL)
+bb <- normalize_packages(x = data)

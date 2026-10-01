@@ -127,8 +127,13 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
         sprintf("%-*s", widths$reference, "Reference")
       )
 
+      pkg_version <- x$installed[idx[1]]
+      if (is.na(pkg_version)) {
+        pkg_version <- ""
+      }
+
       paste(
-        sprintf("%s %s", pkg, x$installed[idx[1]]),
+        sprintf("%s %s", pkg, pkg_version),
         paste(c(cve_header, findings), collapse = "\n"),
         sep = "\n"
       )

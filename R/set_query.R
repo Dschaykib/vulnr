@@ -7,7 +7,7 @@
 #' @keywords internal
 set_query <- function(pkg, version = NULL, eco = "CRAN") {
 
-  if (is.null(version) || is.na(version)) {
+  if (is.null(version) || is.na(version) || trimws(version) == "") {
     out <- list(
       package = list(
         name = pkg,

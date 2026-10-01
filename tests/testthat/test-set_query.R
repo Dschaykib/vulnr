@@ -5,5 +5,7 @@ test_that("set_query builds versioned and unversioned queries", {
   )
 
   expect_false("version" %in% names(set_query("foo")))
+  expect_false("version" %in% names(set_query("foo", NA)))
+  expect_false("version" %in% names(set_query("foo", "")))
 
 })

@@ -1,12 +1,25 @@
 #' Normalize package data
 #'
-#' @param x Data frame with `Package` and `Version` columns.
+#' @param x A data frame with `Package` and `Version` columns, or a character
+#'   vector of package names. A missing or empty version is treated as an
+#'   unversioned package query.
 #' @return A normalized data frame with `Package`, `Version`, `source`, and `path` columns.
 #' @keywords internal
 normalize_packages <- function(x) {
-  if (!is.data.frame(x)) {
-    stop("`x` must be a data frame.", call. = FALSE)
+
+  if (!is.data.frame(x) && !is.vector(x)) {
+    stop("`x` must be a data frame or a vector", call. = FALSE)
   }
+
+
+  # if only a vector was provided, create a data.frame
+  if (is.vector(x)) {
+    x <- data.frame(
+      Package = x,
+      Version = NA_character_
+    )
+  }
+
 
   required <- c("Package", "Version")
   missing <- setdiff(required, names(x))
@@ -30,8 +43,6 @@ normalize_packages <- function(x) {
   )
 
   invalid_package <- is.na(out$Package) | trimws(out$Package) == ""
-  invalid_version <- is.na(out$Version) | trimws(out$Version) == ""
-
   msg <- character()
 
   if (any(invalid_package)) {
@@ -41,17 +52,6 @@ normalize_packages <- function(x) {
         "`Package` contains missing or empty values in row%s: %s.",
         if (sum(invalid_package) > 1L) "s" else "",
         paste(which(invalid_package), collapse = ", ")
-      )
-    )
-  }
-
-  if (any(invalid_version)) {
-    msg <- c(
-      msg,
-      sprintf(
-        "`Version` contains missing or empty values in row%s: %s.",
-        if (sum(invalid_version) > 1L) "s" else "",
-        paste(which(invalid_version), collapse = ", ")
       )
     )
   }
