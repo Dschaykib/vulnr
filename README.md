@@ -103,6 +103,7 @@ underlying vulnerability data table instead of the formatted report.
 - [ ] include CVSS_V2, CVSS_V4, ubuntu  see: https://ossf.github.io/osv-schema/#severity-field
 - [ ] check next_page_token from osv
 - [ ] tackle todo notes in code
+- [ ] fix workflows with correct R versions for dependencies or adjust dependencies
 
 
 ## License
