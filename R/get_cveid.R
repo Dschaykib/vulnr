@@ -27,8 +27,12 @@ get_cveid <- function(resc_dt) {
     out <- resc_dt[i_row, ]
 
     # get upstream
-    # TODO: check for no upstream
-    out <- out[, list(upstream = unlist(cve_request_content$upstream)),
+    this_upstream <- cve_request_content$upstream
+    if (is.null(this_upstream)) {
+      this_upstream <- NA_character_
+    }
+
+    out <- out[, list(upstream = unlist(this_upstream)),
                by = c("package", "installed", "id")]
 
     # get fixed version

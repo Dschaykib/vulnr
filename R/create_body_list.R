@@ -11,6 +11,11 @@ create_body_list <- function(pkg = NULL, version = NULL) {
     return(NULL)
   }
 
+  if (any(is.na(pkg)) || any(pkg == "")) {
+    stop("pkg should not contain missing or empty values")
+  }
+
+
   if (!is.null(version) && length(pkg) != length(version)) {
     stop("pkg and version input must have the same length")
   }

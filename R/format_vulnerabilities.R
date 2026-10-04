@@ -14,7 +14,22 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
     return("No known vulnerabilities found.")
   }
 
+  used_cols <- c("package", "installed", "upstream", "score",
+                 "severity", "fix", "ref")
+  if (!all(used_cols %in% names(x))) {
+    stop(
+      paste0(
+        "Input is missing columns: '",
+        paste0(base::setdiff(used_cols, names(x)), collapse = "', '"),
+        "'"
+      )
+    )
+  }
+
+  x$severity[is.na(x$severity)] <- "UNKNOWN"
+
   severity_order <- c(
+    "UNKNOWN"  = 5L,
     "CRITICAL" = 4L,
     "HIGH"     = 3L,
     "MEDIUM"   = 2L,
@@ -43,23 +58,19 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
   )
 
   # Severity summary
-  severity_levels <- c("CRITICAL", "HIGH", "MEDIUM", "LOW")
+  severity_levels <- names(severity_order)
 
   severity_counts <- table(
     factor(x$severity, levels = severity_levels)
   )
-
-  info <- sprintf(
-    paste0(
-      "  %-8s %d\n",
-      "  %-8s %d\n",
-      "  %-8s %d\n",
-      "  %-8s %d"
+  nonzero_severity_counts <- severity_counts[severity_counts > 0]
+  info <- paste(
+    sprintf(
+      "  %-8s %d",
+      names(nonzero_severity_counts),
+      as.integer(nonzero_severity_counts)
     ),
-    "CRITICAL", severity_counts["CRITICAL"],
-    "HIGH",     severity_counts["HIGH"],
-    "MEDIUM",   severity_counts["MEDIUM"],
-    "LOW",      severity_counts["LOW"]
+    collapse = "\n"
   )
 
   references <- paste0(
@@ -85,13 +96,13 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
 
   # Calculate global column widths
   widths <- list(
-    severity = max(nchar(c("Severity", severity))),
-    package  = max(nchar(c("Package", x$package))),
-    version  = max(nchar(c("Version", x$installed))),
-    upstream = max(nchar(c("Upstream", x$upstream))),
-    score    = max(nchar(c("Score", score))),
-    fix      = max(nchar(c("Fix", fix))),
-    reference = max(nchar(c("Reference", path_ref)))
+    severity = max(nchar(c("Severity", severity)), na.rm = TRUE),
+    package  = max(nchar(c("Package", x$package)), na.rm = TRUE),
+    version  = max(nchar(c("Version", x$installed)), na.rm = TRUE),
+    upstream = max(nchar(c("Upstream", x$upstream)), na.rm = TRUE),
+    score    = max(nchar(c("Score", score)), na.rm = TRUE),
+    fix      = max(nchar(c("Fix", fix)), na.rm = TRUE),
+    reference = max(nchar(c("Reference", path_ref)), na.rm = TRUE)
   )
 
   if (group) {

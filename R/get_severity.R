@@ -18,19 +18,25 @@ get_severity <- function(ids) {
 
   i_id <- ids[1]
   for (i_id in ids) {
-    this_url <- paste0("https://api.osv.dev/v1/vulns/", i_id)
-    cve_request_content <- api_request(url = this_url, verb = "GET")
 
-    vector <- cve_request_content$severity[[1]]$score
+    if (is.na(i_id)) {
+      out <- empty_result
+    } else {
 
-    score <- cvss31_score(vector)
-    severity <- cvss31_severity(score)
+      this_url <- paste0("https://api.osv.dev/v1/vulns/", i_id)
+      cve_request_content <- api_request(url = this_url, verb = "GET")
 
-    out <- data.table::data.table(
-      upstream = i_id,
-      score = score,
-      severity = severity
-    )
+      vector <- cve_request_content$severity[[1]]$score
+
+      score <- cvss31_score(vector)
+      severity <- cvss31_severity(score)
+
+      out <- data.table::data.table(
+        upstream = i_id,
+        score = score,
+        severity = severity
+      )
+    }
 
 
     id_list[[i_id]] <- out

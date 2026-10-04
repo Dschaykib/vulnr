@@ -41,7 +41,8 @@ check <- function(
     )
   }
 
-  if (!is.logical(return_cves) || length(return_cves) != 1L ||
+  if (!is.logical(return_cves) ||
+      length(return_cves) != 1L ||
       is.na(return_cves)) {
     stop("'return_cves' must be a single non-missing logical value")
   }
@@ -63,7 +64,8 @@ check <- function(
   }
 
   if (length(inputs) == 0L) {
-    message("No known vulnerabilities found.")
+    msg <- "No packages to check, since input was empty."
+    message(msg)
     return(invisible(NULL))
   }
 

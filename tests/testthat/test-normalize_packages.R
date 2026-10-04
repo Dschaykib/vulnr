@@ -2,6 +2,7 @@ testthat::test_that("normalize_packages validates and annotates data", {
   out <- normalize_packages(data.frame(Package = "foo", Version = "1.0"))
   testthat::expect_named(out, c("Package", "Version", "source", "path"))
   testthat::expect_equal(out$source, "data")
+
   out <- normalize_packages(c("foo", "bar"))
   testthat::expect_equal(out$Package, c("foo", "bar"))
   testthat::expect_true(all(is.na(out$Version)))

@@ -5,7 +5,7 @@ testthat::test_that("it calculates severity from a mocked CVSS vector", {
         score = "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
       )))
     },
-    .package = "vulr"
+    .package = "vulnr"
   )
 
   result <- get_severity("CVE-1")

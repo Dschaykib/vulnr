@@ -24,7 +24,7 @@ testthat::test_that("check handles no findings", {
     ref = character()
   )
   testthat::local_mocked_bindings(
-    check_packages = function(x) empty_findings, .package = "vulr"
+    check_packages = function(x) empty_findings, .package = "vulnr"
   )
 
   testthat::expect_no_warning(
@@ -44,7 +44,7 @@ testthat::test_that("check reports mocked vulnerabilities", {
     severity = "CRITICAL", fix = "1.1", ref = "[1]"
   )
   testthat::local_mocked_bindings(
-    check_packages = function(x) findings, .package = "vulr"
+    check_packages = function(x) findings, .package = "vulnr"
   )
   testthat::expect_error(
     check(
@@ -61,16 +61,17 @@ testthat::test_that("check can return mocked vulnerabilities", {
     severity = "CRITICAL", fix = "1.1"
   )
   testthat::local_mocked_bindings(
-    check_packages = function(x) findings, .package = "vulr"
+    check_packages = function(x) findings, .package = "vulnr"
   )
 
   result <- check(
     data = data.frame(Package = "foo", Version = "1.0"),
-    renv_file = NULL,
     lib = NULL,
+    renv_file = NULL,
     return_cves = TRUE
   )
 
+  # add reference here, since it is added after the mocked data
   findings$ref <- "[1]"
   testthat::expect_equal(result, findings)
 })

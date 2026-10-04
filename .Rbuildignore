@@ -2,6 +2,7 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.github/
 
 misc/
 renv-lockfiles/

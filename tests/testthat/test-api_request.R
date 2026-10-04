@@ -4,3 +4,7 @@ testthat::test_that("api_request validates its HTTP verb", {
     "should be one of"
   )
 })
+
+
+# TODO test POST with out body
+# TODO test needed API format?

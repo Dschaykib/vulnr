@@ -9,7 +9,8 @@ check(
   renv_file = "renv.lock",
   lib = .libPaths(),
   error_level = "LOW",
-  group = TRUE
+  group = TRUE,
+  return_cves = FALSE
 )
 }
 \arguments{
@@ -24,9 +25,13 @@ installed libraries.}
 `HIGH`, `MEDIUM`, or `LOW`.}
 
 \item{group}{Logical; if `TRUE`, group findings by package in the report.}
+
+\item{return_cves}{Logical; if `TRUE`, return the CVE data table instead of
+reporting findings with a warning or error.}
 }
 \value{
-Invisibly returns `NULL`; reports findings with a warning or error.
+Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,
+  returns the CVE data table.
 }
 \description{
 Scans explicitly supplied package data, an `renv.lock` file, and installed

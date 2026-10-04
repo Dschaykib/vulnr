@@ -1,21 +1,22 @@
-Package: vulr
+Package: vulnr
 Title: Vulnerability Scans
-Version: 0.1.0
-Authors@R: person('Jakob', 'Gepp',email = 'jakob.gepp@yahoo.com',role = c('cre', 'aut'))
+Version: 0.0.2
+Date: 2026-10-04
+Authors@R: 
+    person("Jakob", "Gepp", , "jakob.gepp@yahoo.com", role = c("cre", "aut"))
 Description: Scan R projects for vulnerabilities.
 License: MIT + file LICENSE
-URL: https://github.com/Dschaykib/vulr
-BugReports: https://github.com/Dschaykib/vulr/issues
-Encoding: UTF-8
+URL: https://github.com/Dschaykib/vulnr
+BugReports: https://github.com/Dschaykib/vulnr/issues
 Depends: 
     R (>= 4.5)
-Suggests: 
-    testthat
 Imports: 
     data.table,
     httr,
     jsonlite,
     stats,
     utils
-Date: 2026-10-01
+Suggests: 
+    testthat
 Config/roxygen2/version: 8.0.0
+Encoding: UTF-8

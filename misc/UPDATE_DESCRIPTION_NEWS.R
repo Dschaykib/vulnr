@@ -26,7 +26,7 @@ unlink("NEWS.md")
   my_news <- newsmd::newsmd()
 
   # Set your package name
-  my_desc$set("Package", "vulr")
+  my_desc$set("Package", "vulnr")
   # Set license
   my_desc$set("License", "MIT + file LICENSE")
 
@@ -40,9 +40,9 @@ unlink("NEWS.md")
   my_desc$set(Description =
                 paste0("Scan R projects for vulnerabilities."))
   # The urls
-  my_desc$set("URL", "https://github.com/Dschaykib/vulr")
+  my_desc$set("URL", "https://github.com/Dschaykib/vulnr")
   my_desc$set("BugReports",
-              "https://github.com/Dschaykib/vulr/issues")
+              "https://github.com/Dschaykib/vulnr/issues")
 
 
   #Set authors
@@ -74,10 +74,19 @@ unlink("NEWS.md")
 
   # add functions -----------------------------------------------------------
 
-  my_desc$bump_version("minor")
+  my_desc$bump_version("patch")
   my_news$add_version(my_desc$get_version())
 
   my_news$add_bullet(c("add CVE check functions"))
+
+  my_desc$bump_version("patch")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "fix missing upstreams",
+    "add github actions",
+    "change name to vulnr"
+    ))
 
 
 }
@@ -85,7 +94,7 @@ unlink("NEWS.md")
 
 # get vulnerabilities -----------------------------------------------------
 
-cves_dt <- vulr::check(lib = NULL, return_cves = TRUE)
+cves_dt <- vulnr::check(lib = NULL, return_cves = TRUE)
 vuls_num <- nrow(cves_dt)
 vuls_status <- ifelse(vuls_num == 0, "success", "red")
 
@@ -98,7 +107,7 @@ vuls_status <- ifelse(vuls_num == 0, "success", "red")
 
   # set pkg version number in README
   my_readme <- readLines("README.md")
-  my_readme[1] <- paste0("# vulr - ", my_desc$get_version(),
+  my_readme[1] <- paste0("# vulnr - ", my_desc$get_version(),
     " <img src=\"misc/logo.png\" width=170 align=\"right\" />")
   # set dev version number
   my_readme <- gsub(pattern = "badge/Version-.*-success",
@@ -157,4 +166,3 @@ covr::package_coverage()
 
 # check package structure
 devtools::check(document = FALSE)
-

@@ -26,7 +26,6 @@ check_packages <- function(check_data) {
     results = osv_content$results
   )
 
-
   # get severity from upstream CVE
   cve_dt <- get_cveid(resc_dt = resc_dt)
   severity_dt <- get_severity(ids = unique(cve_dt$upstream))
@@ -35,7 +34,8 @@ check_packages <- function(check_data) {
   cves <- data.table::merge.data.table(
     x = cve_dt,
     y = severity_dt,
-    by = "upstream"
+    by = "upstream",
+    all = TRUE
   )
 
   return(cves)

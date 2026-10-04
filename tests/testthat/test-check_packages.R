@@ -17,9 +17,17 @@ testthat::test_that("check_packages combines mocked OSV responses", {
       calls <<- calls + 1L
       if (calls == 1L) responses[[1L]] else responses[[2L]]
     },
-    .package = "vulr"
+    .package = "vulnr"
   )
   result <- check_packages(data.frame(Package = "foo", Version = "1.0"))
+
+  # check output format
+  testthat::expect_equal(dim(result), c(1, 7))
+  testthat::expect_contains(
+    names(result),
+    c("upstream", "package", "installed", "id", "fix", "score", "severity")
+  )
+  # check content
   testthat::expect_equal(result$upstream, "CVE-1")
   testthat::expect_equal(result$severity, "CRITICAL")
   testthat::expect_equal(result$fix, "1.1")

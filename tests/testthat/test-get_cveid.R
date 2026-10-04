@@ -16,7 +16,7 @@ testthat::test_that("get_cveid extracts upstream IDs and fixed versions", {
   )
   testthat::local_mocked_bindings(
     api_request = function(...) response,
-    .package = "vulr"
+    .package = "vulnr"
   )
   input <- data.table::data.table(
     package = "foo", installed = "1.0", id = "RSEC-1"

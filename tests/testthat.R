@@ -1,4 +1,4 @@
 library(testthat)
-library(vulr)
+library(vulnr)
 
-testthat::test_check("vulr")
+testthat::test_check("vulnr")
