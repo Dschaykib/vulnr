@@ -2,9 +2,9 @@
 
 | branch        | master | dev  |
 | ------------- | ------ | ---- |
-| R CMD check   | [![master-branch](https://github.com/Dschaykib/vulnr/workflows/R-CMD-check-fix/badge.svg?branch=master)](https://github.com/Dschaykib/vulnr/actions?query=workflow%3AR-CMD-check-fix+branch%3Amaster) | [![dev-branch](https://github.com/Dschaykib/vulnr/workflows/R-CMD-check-fix/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions?query=workflow%3AR-CMD-check-fix+branch%3Adev) |
+| R CMD check   | [![master-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | [![dev-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | |
 | test coverage | [![master-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/master.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/master) | [![dev-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/dev.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/dev) |
-| lints         | [![master-lints](https://github.com/Dschaykib/vulnr/workflows/lints/badge.svg?branch=master)](https://github.com/Dschaykib/vulnr/actions?query=workflow%3Alints+branch%3Amaster) | [![dev-lints](https://github.com/Dschaykib/vulnr/workflows/lints/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions?query=workflow%3Alints+branch%3Adev) |
+| lints         | [![master-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) | [![dev-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) |
 | vulnerabilities | - | ![vulnerabilities](https://img.shields.io/badge/vulnerabilities-1-red) |
 
 ----
