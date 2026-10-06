@@ -100,12 +100,22 @@ unlink("NEWS.md")
   ))
 
 
+# add dependencies and DESCRIPTION file parsing ---------------------------
+
+  my_desc$bump_version("dev")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "add function to parse DESCRIPTION files as input",
+    "add sub dependency checks with 'dependencies = TRUE'",
+    "version can now be a constraint like '>= 1.2.0'"
+  ))
+
+  # set min version to avoid CVE
+  my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = ">= 1.8.8")
+
 }
 
-
-# check vulnerabilities -----------------------------------------------------
-
-vulnr::check(lib = NULL)
 
 # save everything ---------------------------------------------------------
 
@@ -134,6 +144,19 @@ vulnr::check(lib = NULL)
   # remove old docs
   file.remove(list.files("man", full.names = TRUE))
 }
+
+# check vulnerabilities -----------------------------------------------------
+
+check(
+  lib = NULL,
+  renv_file = NULL,
+  dcf = "DESCRIPTION",
+  dependencies = TRUE
+)
+
+
+# rebuild package parts ---------------------------------------------------
+
 
 origin::originize_pkg(exclude_files = misc_files)
 

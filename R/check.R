@@ -20,11 +20,15 @@
 #' @export
 check <- function(
     data = NULL,
+    # TODO make NULL the default?
     renv_file = "renv.lock",
     lib = .libPaths(),
+    dcf = NULL,
     error_level = "LOW",
     group = TRUE,
-    return_cves = FALSE) {
+    return_cves = FALSE,
+    dependencies = FALSE
+) {
 
 
   # including for package build notes
@@ -63,13 +67,22 @@ check <- function(
     inputs$lib <- parse_library(lib = lib)
   }
 
+  if (!is.null(dcf)) {
+    inputs$dcf <- parse_dcf(file = dcf)
+  }
+
   if (length(inputs) == 0L) {
     msg <- "No packages to check, since input was empty."
     message(msg)
     return(invisible(NULL))
   }
 
-  inputs_all <- data.table::rbindlist(inputs)
+  inputs_all <- data.table::rbindlist(inputs, use.names = TRUE, fill = TRUE)
+
+  if (dependencies) {
+    inputs_all <- add_dependencies(data = inputs_all)
+  }
+
 
   # actual vulnerability check
   check_data <- unique(inputs_all[, c("Package", "Version")])
@@ -82,6 +95,8 @@ check <- function(
     by.x = c("package", "installed"),
     by.y = c("Package", "Version")
   )
+
+  # TODO add rev_dep info to output
 
   path_info <- sort(unique(cves_merged$path))
   cves_merged$path <- as.numeric(
@@ -105,7 +120,7 @@ check <- function(
   msg <- format_vulnerabilities(cves_full, group = group, refs = path_info)
 
   error_idx <- which(error_level == severity_levels)
-  severity_idx <- match(cves$severity, severity_levels)
+  severity_idx <- match(cves_full$severity, severity_levels)
 
 
   if (any(severity_idx <= error_idx)) {
@@ -113,7 +128,7 @@ check <- function(
     stop(msg$summary, call. = FALSE)
   }
 
-  if (!is.null(cves) && nrow(cves) != 0) {
+  if (!is.null(cves_full) && nrow(cves_full) != 0) {
     message(msg$details)
     warning(msg$summary, call. = FALSE)
   } else {

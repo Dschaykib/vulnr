@@ -1,4 +1,4 @@
-# vulnr - 0.0.2.9000 <img src="misc/logo.png" width=170 align="right" />
+# vulnr - 0.0.2.9001 <img src="misc/logo.png" width=170 align="right" />
 
 | branch        | main | dev  |
 | ------------- | ------ | ---- |

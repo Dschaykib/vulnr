@@ -8,9 +8,11 @@ check(
   data = NULL,
   renv_file = "renv.lock",
   lib = .libPaths(),
+  dcf = NULL,
   error_level = "LOW",
   group = TRUE,
-  return_cves = FALSE
+  return_cves = FALSE,
+  dependencies = FALSE
 )
 }
 \arguments{

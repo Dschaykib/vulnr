@@ -1,6 +1,6 @@
 Package: vulnr
 Title: Vulnerability Scans
-Version: 0.0.2.9000
+Version: 0.0.2.9001
 Date: 2026-10-06
 Authors@R: 
     person("Jakob", "Gepp", , "jakob.gepp@yahoo.com", role = c("cre", "aut"))
@@ -13,10 +13,10 @@ Depends:
 Imports: 
     data.table,
     httr,
-    jsonlite,
+    jsonlite (>= 1.8.8),
     stats,
     utils
 Suggests: 
     testthat
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 Encoding: UTF-8

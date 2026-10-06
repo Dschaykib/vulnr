@@ -9,6 +9,16 @@ data <- data.frame(
   Version = NA_character_
 )
 
+check_data <- data.frame(
+  Package = c("commonmark"),
+  Version = NA_character_
+)
+
+check_data <- data.table::data.table(
+  Package = c("commonmark"),
+  Version = ">= 1.8.1"
+)
+
 
 check_data <- data.frame(
   Package = c("commonmark"),
@@ -173,11 +183,25 @@ if (!is.null(cves) || nrow(cves) != 0) {
 
 # -------------------------------------------------------------------------
 data <- data.frame(
-  Package = c("commonmark", "gh"),
-  Version = c("1.7", NA_character_)
+  Package = c("commonmark", "gh", "dplyr", "adepro"),
+  Version = c("1.7", NA_character_, "1.2.1", "4.2.7")
 )
 
 data <- c("commonmark", "gh")
 
 aa <- check(data = data, renv_file = NULL, lib = NULL)
 bb <- normalize_packages(x = data)
+
+cc <- check(data = data, renv_file = NULL, lib = NULL, dependencies = TRUE)
+
+check_packages(check_data = check_data)
+
+# TODO check why Source is empty
+devtools::load_all()
+debugonce(check_packages)
+debugonce(check)
+vulnr::check(lib = NULL, dcf = "DESCRIPTION", dependencies = TRUE)
+dcf_file <- "/Users/jakobgepp/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.5/aarch64-apple-darwin20/dplyr/1.2.1/d71f190466b9496cf8543c76641be5cf/dplyr/DESCRIPTION"
+vulnr::check(renv_file = NULL, lib = NULL, dcf = dcf_file, dependencies = TRUE)
+
+vulnr::check(renv_file = "renv.lock", lib = NULL, dcf = dcf_file, dependencies = TRUE)

@@ -1,3 +1,11 @@
+## version 0.0.2.9001
+
+---
+
+- add function to parse DESCRIPTION files as input
+- add sub dependency checks with 'dependencies = TRUE'
+- version can now be a constraint like '>= 1.2.0'
+
 ## version 0.0.2.9000
 
 ---

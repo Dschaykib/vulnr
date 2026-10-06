@@ -22,7 +22,13 @@ jobs:
         id: check_vulnerabilities
         continue-on-error: true
         run: |
-          audit_renv <- vulnr::check()
+          audit_renv <- cves <- vulnr::check(
+            lib = NULL,
+            renv_file = NULL,
+            dcf = "DESCRIPTION",
+            dependencies = TRUE,
+            return_cves = FALSE
+          )
         shell: Rscript {0}
 
       # Publish a branch-specific Shields endpoint. This runs only after a
@@ -32,7 +38,13 @@ jobs:
         env:
           BADGE_BRANCH: ${{ github.ref_name }}
         run: |
-          cves <- vulnr::check(return_cves = TRUE)
+          cves <- vulnr::check(
+            lib = NULL,
+            renv_file = NULL,
+            dcf = "DESCRIPTION",
+            dependencies = TRUE,
+            return_cves = TRUE
+          )
           count <- if (is.null(cves)) 0L else nrow(cves)
           colour <- if (count == 0L) "brightgreen" else "red"
           badge <- list(
