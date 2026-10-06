@@ -1,3 +1,9 @@
+## version 0.0.2.9000
+
+---
+
+- refactor creation of status badges for vulnerabilities
+
 ## version 0.0.2
 
 ---

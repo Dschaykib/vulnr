@@ -1,7 +1,7 @@
 Package: vulnr
 Title: Vulnerability Scans
-Version: 0.0.2
-Date: 2026-10-04
+Version: 0.0.2.9000
+Date: 2026-10-06
 Authors@R: 
     person("Jakob", "Gepp", , "jakob.gepp@yahoo.com", role = c("cre", "aut"))
 Description: Scan R projects for vulnerabilities.

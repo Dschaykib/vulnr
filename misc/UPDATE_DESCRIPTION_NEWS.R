@@ -89,14 +89,23 @@ unlink("NEWS.md")
     ))
 
 
+  #  fix badges -------------------------------------------------------------
+
+
+  my_desc$bump_version("dev")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "refactor creation of status badges for vulnerabilities"
+  ))
+
+
 }
 
 
-# get vulnerabilities -----------------------------------------------------
+# check vulnerabilities -----------------------------------------------------
 
-cves_dt <- vulnr::check(lib = NULL, return_cves = TRUE)
-vuls_num <- nrow(cves_dt)
-vuls_status <- ifelse(vuls_num == 0, "success", "red")
+vulnr::check(lib = NULL)
 
 # save everything ---------------------------------------------------------
 
@@ -115,14 +124,6 @@ vuls_status <- ifelse(vuls_num == 0, "success", "red")
                                          my_desc$get_version(),
                                          "-success"),
                     x = my_readme)
-  # set vulnerabilities
-  vuls_idx <- grep(pattern = "\\| vulnerabilities \\|", x = my_readme)
-  my_readme[vuls_idx] <- paste0(
-    "| vulnerabilities | - | ![vulnerabilities]",
-    "(https://img.shields.io/badge/vulnerabilities-",
-    vuls_num, "-", vuls_status, ") |"
-  )
-
 
   writeLines(my_readme, "README.md")
 
