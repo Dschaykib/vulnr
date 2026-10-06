@@ -109,3 +109,4 @@ underlying vulnerability data table instead of the formatted report.
 ## License
 
 MIT
+
