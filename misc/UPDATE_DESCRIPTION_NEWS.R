@@ -91,7 +91,6 @@ unlink("NEWS.md")
 
   #  fix badges -------------------------------------------------------------
 
-
   my_desc$bump_version("dev")
   my_news$add_version(my_desc$get_version())
 
@@ -100,7 +99,7 @@ unlink("NEWS.md")
   ))
 
 
-# add dependencies and DESCRIPTION file parsing ---------------------------
+  # add dependencies and DESCRIPTION file parsing ---------------------------
 
   my_desc$bump_version("dev")
   my_news$add_version(my_desc$get_version())
@@ -113,6 +112,7 @@ unlink("NEWS.md")
 
   # set min version to avoid CVE
   my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = ">= 1.8.8")
+  my_desc$set_dep("tools", type = desc::dep_types[1], version = "*")
 
 }
 
@@ -147,7 +147,7 @@ unlink("NEWS.md")
 
 # check vulnerabilities -----------------------------------------------------
 
-check(
+vulnr::check(
   lib = NULL,
   renv_file = NULL,
   dcf = "DESCRIPTION",

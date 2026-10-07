@@ -1,5 +1,19 @@
+#' Add recursive package dependencies
+#'
+#' Resolves strong recursive dependencies from the latest CRAN metadata and
+#' appends dependencies that are not already present in `data`.
+#'
+#' @param data Data frame containing a `Package` column.
+#' @return A data table containing the input packages and their dependencies.
+#'
+#' @keywords internal
+#' @importFrom tools package_dependencies
+#' @import data.table
+#'
 add_dependencies <- function(data) {
-  # get all dependencies of the given package
+
+  # including for package build notes
+  path <- Package <- NULL
 
   message("To get the dependencies, the latest CRAN version are used.")
 

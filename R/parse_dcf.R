@@ -1,13 +1,29 @@
+#' Parse package dependencies from DESCRIPTION files
+#'
+#' Reads `Depends`, `Imports`, and `Suggests` fields and returns one row per
+#' package, excluding the base R dependency.
+#'
+#' @details
+#' For the output, the source is set to 'DESCRIPTION' and the path are the
+#' packages that depend on it.
+#'
+#' @param file Character vector of existing DESCRIPTION file paths.
+#' @return A data table with `Package`, `Version`, `source`, and `path`.
+#' @keywords internal
 parse_dcf <- function(file = "DESCRIPTION") {
-
-  #file <- "DESCRIPTION"
-  #file <- "/Users/jakobgepp/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.5/aarch64-apple-darwin20/dplyr/1.2.1/d71f190466b9496cf8543c76641be5cf/dplyr/DESCRIPTION"
 
   # TODO adjust for multiple file inputs
 
+  # include to dissmis NOTE in pkg build
+  Package <- NULL
+
   file_idx <- !file.exists(file)
   if (any(file_idx)) {
-    stop("file does not exit: '", paste0(file[file_idx], collapse = "', '"), "'")
+    stop(
+      "file does not exit: '",
+      paste0(file[file_idx], collapse = "', '"),
+      "'"
+    )
   }
 
   desc <- read.dcf(file)[1, ]

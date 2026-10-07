@@ -7,11 +7,14 @@
 #' @param renv_file Path to an `renv.lock` file, or `NULL` to skip it.
 #' @param lib Character vector of library paths, or `NULL` to skip
 #' installed libraries.
+#' @param dcf Path to a DESCRIPTION file, or `NULL` to skip it.
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
 #' @param group Logical; if `TRUE`, group findings by package in the report.
 #' @param return_cves Logical; if `TRUE`, return the CVE data table instead of
 #'   reporting findings with a warning or error.
+#' @param dependencies Logical; if `TRUE`, include recursive strong package
+#'   dependencies in the scan.
 #'
 #' @return Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,
 #'   returns the CVE data table.
@@ -19,15 +22,15 @@
 #' @importFrom data.table rbindlist
 #' @export
 check <- function(
-    data = NULL,
-    # TODO make NULL the default?
-    renv_file = "renv.lock",
-    lib = .libPaths(),
-    dcf = NULL,
-    error_level = "LOW",
-    group = TRUE,
-    return_cves = FALSE,
-    dependencies = FALSE
+  data = NULL,
+  # TODO make NULL the default?
+  renv_file = "renv.lock",
+  lib = .libPaths(),
+  dcf = NULL,
+  error_level = "LOW",
+  group = TRUE,
+  return_cves = FALSE,
+  dependencies = FALSE
 ) {
 
 

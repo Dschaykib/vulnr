@@ -2,9 +2,12 @@
 #'
 #' @param check_data Data frame containing `Package` and `Version` columns.
 #' @return A data table of vulnerabilities and severity information, or `NULL`.
-#' @importFrom data.table merge.data.table
+#' @import data.table
 #' @keywords internal
 check_packages <- function(check_data) {
+
+  # including for package build notes
+  keep <- Version <- installed <- fix <- NULL
 
   # check for data.table
   if (!data.table::is.data.table(check_data)) {
