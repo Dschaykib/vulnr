@@ -73,8 +73,8 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
     collapse = "\n"
   )
 
-  references <- paste0(
-    c("References:\n",
+  sources <- paste0(
+    c("Sources:\n",
       paste0(
         "[", seq_along(refs), "] ", refs,
         sep = "\n"
@@ -102,7 +102,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
     upstream = max(nchar(c("Upstream", x$upstream)), na.rm = TRUE),
     score    = max(nchar(c("Score", score)), na.rm = TRUE),
     fix      = max(nchar(c("Fix", fix)), na.rm = TRUE),
-    reference = max(nchar(c("Reference", path_ref)), na.rm = TRUE)
+    source = max(nchar(c("Source", path_ref)), na.rm = TRUE)
   )
 
   if (group) {
@@ -122,7 +122,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
           widths$score,
           score[i],
           sprintf("%-*s", widths$fix, fix[i]),
-          sprintf("%-*s", widths$reference, path_ref[i])
+          sprintf("%-*s", widths$source, path_ref[i])
         )
       }, character(1))
 
@@ -135,7 +135,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
         widths$score,
         "Score",
         sprintf("%-*s", widths$fix, "Fix"),
-        sprintf("%-*s", widths$reference, "Reference")
+        sprintf("%-*s", widths$source, "Source")
       )
 
       pkg_version <- x$installed[idx[1]]
@@ -172,8 +172,8 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
       "Score",
       widths$fix,
       "Fix",
-      widths$reference,
-      "Reference"
+      widths$source,
+      "Source"
     )
 
     rows <- vapply(seq_len(nrow(x)), function(i) {
@@ -191,7 +191,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
         score[i],
         widths$fix,
         fix[i],
-        widths$reference,
+        widths$source,
         path_ref[i]
       )
     }, character(1))
@@ -207,7 +207,7 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
     details = paste0(
       cve_block,
       "\n\n",
-      references
+      sources
     )
   )
 

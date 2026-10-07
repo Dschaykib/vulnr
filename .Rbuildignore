@@ -5,6 +5,7 @@
 .github/
 
 misc/
+badges/
 renv-lockfiles/
 
 ^\.lintr$

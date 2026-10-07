@@ -1,13 +1,14 @@
-# vulnr - 0.0.2.9000 <img src="misc/logo.png" width=170 align="right" />
+# vulnr - 0.0.2.9001 <img src="misc/logo.png" width=170 align="right" />
 
-| branch        | master | dev  |
+| branch        | main | dev  |
 | ------------- | ------ | ---- |
-| R CMD check   | [![master-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | [![dev-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | |
-| test coverage | [![master-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/master.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/master) | [![dev-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/dev.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/dev) |
-| lints         | [![master-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) | [![dev-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) |
+| R CMD check   | [![main-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | [![dev-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | |
+| test coverage | [![main-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/main.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/main) | [![dev-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/dev.svg)](https://codecov.io/gh/Dschaykib/vulnr/branch/dev) |
+| lints         | [![main-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) | [![dev-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) |
 | vulnerabilities | [![main vulnerabilities](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Dschaykib/vulnr/main/badges/vulnerabilities-main.json)](https://github.com/Dschaykib/vulnr/blob/main/badges/vulnerabilities-main.json) | [![dev vulnerabilities](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Dschaykib/vulnr/dev/badges/vulnerabilities-dev.json)](https://github.com/Dschaykib/vulnr/blob/dev/badges/vulnerabilities-dev.json) |
 
 ----
+
 
 Scan R project dependencies for known security vulnerabilities.
 

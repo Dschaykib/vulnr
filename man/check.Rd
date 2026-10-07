@@ -8,9 +8,11 @@ check(
   data = NULL,
   renv_file = "renv.lock",
   lib = .libPaths(),
+  dcf = NULL,
   error_level = "LOW",
   group = TRUE,
-  return_cves = FALSE
+  return_cves = FALSE,
+  dependencies = FALSE
 )
 }
 \arguments{
@@ -21,6 +23,8 @@ check(
 \item{lib}{Character vector of library paths, or `NULL` to skip
 installed libraries.}
 
+\item{dcf}{Path to a DESCRIPTION file, or `NULL` to skip it.}
+
 \item{error_level}{Minimum severity that causes an error. One of `CRITICAL`,
 `HIGH`, `MEDIUM`, or `LOW`.}
 
@@ -28,6 +32,9 @@ installed libraries.}
 
 \item{return_cves}{Logical; if `TRUE`, return the CVE data table instead of
 reporting findings with a warning or error.}
+
+\item{dependencies}{Logical; if `TRUE`, include recursive strong package
+dependencies in the scan.}
 }
 \value{
 Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,

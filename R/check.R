@@ -7,11 +7,14 @@
 #' @param renv_file Path to an `renv.lock` file, or `NULL` to skip it.
 #' @param lib Character vector of library paths, or `NULL` to skip
 #' installed libraries.
+#' @param dcf Path to a DESCRIPTION file, or `NULL` to skip it.
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
 #' @param group Logical; if `TRUE`, group findings by package in the report.
 #' @param return_cves Logical; if `TRUE`, return the CVE data table instead of
 #'   reporting findings with a warning or error.
+#' @param dependencies Logical; if `TRUE`, include recursive strong package
+#'   dependencies in the scan.
 #'
 #' @return Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,
 #'   returns the CVE data table.
@@ -19,12 +22,16 @@
 #' @importFrom data.table rbindlist
 #' @export
 check <- function(
-    data = NULL,
-    renv_file = "renv.lock",
-    lib = .libPaths(),
-    error_level = "LOW",
-    group = TRUE,
-    return_cves = FALSE) {
+  data = NULL,
+  # TODO make NULL the default?
+  renv_file = "renv.lock",
+  lib = .libPaths(),
+  dcf = NULL,
+  error_level = "LOW",
+  group = TRUE,
+  return_cves = FALSE,
+  dependencies = FALSE
+) {
 
 
   # including for package build notes
@@ -63,13 +70,22 @@ check <- function(
     inputs$lib <- parse_library(lib = lib)
   }
 
+  if (!is.null(dcf)) {
+    inputs$dcf <- parse_dcf(file = dcf)
+  }
+
   if (length(inputs) == 0L) {
     msg <- "No packages to check, since input was empty."
     message(msg)
     return(invisible(NULL))
   }
 
-  inputs_all <- data.table::rbindlist(inputs)
+  inputs_all <- data.table::rbindlist(inputs, use.names = TRUE, fill = TRUE)
+
+  if (dependencies) {
+    inputs_all <- add_dependencies(data = inputs_all)
+  }
+
 
   # actual vulnerability check
   check_data <- unique(inputs_all[, c("Package", "Version")])
@@ -82,6 +98,8 @@ check <- function(
     by.x = c("package", "installed"),
     by.y = c("Package", "Version")
   )
+
+  # TODO add rev_dep info to output
 
   path_info <- sort(unique(cves_merged$path))
   cves_merged$path <- as.numeric(
@@ -105,7 +123,7 @@ check <- function(
   msg <- format_vulnerabilities(cves_full, group = group, refs = path_info)
 
   error_idx <- which(error_level == severity_levels)
-  severity_idx <- match(cves$severity, severity_levels)
+  severity_idx <- match(cves_full$severity, severity_levels)
 
 
   if (any(severity_idx <= error_idx)) {
@@ -113,7 +131,7 @@ check <- function(
     stop(msg$summary, call. = FALSE)
   }
 
-  if (!is.null(cves) && nrow(cves) != 0) {
+  if (!is.null(cves_full) && nrow(cves_full) != 0) {
     message(msg$details)
     warning(msg$summary, call. = FALSE)
   } else {
