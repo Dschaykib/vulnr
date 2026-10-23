@@ -15,4 +15,12 @@ A data table linking packages to upstream vulnerability identifiers.
 \description{
 Retrieve upstream identifiers and fixed versions
 }
+\examples{
+\dontrun{
+get_cveid(data.table::data.table(
+  package = "jsonlite", installed = "1.8.0", id = "OSV-EXAMPLE",
+  fix = NA_character_
+))
+}
+}
 \keyword{internal}

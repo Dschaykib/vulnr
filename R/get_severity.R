@@ -2,7 +2,12 @@
 #'
 #' @param ids Character vector of upstream vulnerability identifiers.
 #' @return A data table with identifiers, CVSS scores, and severity labels.
+#' @examples
+#' \dontrun{
+#' get_severity("CVE-2024-99999")
+#' }
 #' @importFrom data.table data.table rbindlist
+#' @export
 #' @keywords internal
 get_severity <- function(ids) {
 

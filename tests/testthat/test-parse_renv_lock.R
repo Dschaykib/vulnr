@@ -22,7 +22,8 @@ for (renv_version in renv_fixture_versions) {
 
     testthat::expect_true(is.data.frame(result))
     testthat::expect_named(result, c("Package", "Version", "source", "path"))
-    testthat::expect_true(nrow(result) > 0L)
+    testthat::expect_gt(nrow(result), 0L)
+    testthat::expect_gt(nrow(result), 0L)
     testthat::expect_true(all(nzchar(result$Package)))
     testthat::expect_true(all(nzchar(result$Version)))
     testthat::expect_true(all(result$source == "renv"))

@@ -5,6 +5,9 @@
 #'   unversioned package query.
 #' @return A normalized data frame with `Package`, `Version`, `source`,
 #'  and `path` columns.
+#' @examples
+#' normalize_packages(c("jsonlite", "httr"))
+#' @export
 #' @keywords internal
 normalize_packages <- function(x) {
 
@@ -30,7 +33,7 @@ normalize_packages <- function(x) {
       sprintf(
         "`x` is missing required column%s: %s.",
         if (length(missing) > 1L) "s" else "",
-        paste(missing, collapse = ", ")
+        paste0(missing, collapse = ", ")
       ),
       call. = FALSE
     )
@@ -52,7 +55,7 @@ normalize_packages <- function(x) {
       sprintf(
         "`Package` contains missing or empty values in row%s: %s.",
         if (sum(invalid_package) > 1L) "s" else "",
-        paste(which(invalid_package), collapse = ", ")
+        paste0(which(invalid_package), collapse = ", ")
       )
     )
   }

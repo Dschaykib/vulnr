@@ -16,7 +16,7 @@ testthat::test_that("it appends dependencies without duplicates", {
 
   result <- add_dependencies(data)
 
-  testthat::expect_equal(result, check_dt)
+  testthat::expect_identical(result, check_dt)
 
 })
 
@@ -40,6 +40,6 @@ testthat::test_that("it does not append already present packages", {
   )
 
   result <- add_dependencies(data)
-  testthat::expect_equal(result, check_dt)
+  testthat::expect_identical(result, check_dt)
 
 })

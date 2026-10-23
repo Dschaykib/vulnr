@@ -19,4 +19,9 @@ The parsed API response.
 \description{
 Send a request to the OSV API
 }
+\examples{
+\dontrun{
+api_request("https://api.osv.dev/v1/vulns/RUSTSEC-2020-0001")
+}
+}
 \keyword{internal}

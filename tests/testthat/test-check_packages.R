@@ -28,7 +28,7 @@ testthat::test_that("check_packages combines mocked OSV responses", {
     c("upstream", "package", "installed", "id", "fix", "score", "severity")
   )
   # check content
-  testthat::expect_equal(result$upstream, "CVE-1")
-  testthat::expect_equal(result$severity, "CRITICAL")
-  testthat::expect_equal(result$fix, "1.1")
+  testthat::expect_identical(result$upstream, "CVE-1")
+  testthat::expect_identical(result$severity, "CRITICAL")
+  testthat::expect_identical(result$fix, "1.1")
 })

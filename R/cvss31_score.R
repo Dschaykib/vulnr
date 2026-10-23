@@ -3,7 +3,11 @@
 #' @param vector A CVSS 3.1 vector string.
 #' @return A numeric score between 0 and 10.
 #'
+#' @examples
+#' cvss31_score("CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H")
+#'
 #' @importFrom stats setNames
+#' @export
 #' @keywords internal
 cvss31_score <- function(vector) {
   # Remove prefix and parse metrics
@@ -69,39 +73,4 @@ cvss31_score <- function(vector) {
   }
 
   unname(score)
-}
-
-#' Convert a CVSS score to a severity label
-#'
-#' @param score Numeric CVSS score.
-#' @return One of `NONE`, `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`.
-#' @keywords internal
-cvss31_severity <- function(score) {
-  if (score == 0) {
-    "NONE"
-  } else if (score < 4.0) {
-    "LOW"
-  } else if (score < 7.0) {
-    "MEDIUM"
-  } else if (score < 9.0) {
-    "HIGH"
-  } else {
-    "CRITICAL"
-  }
-}
-
-
-#' Parse a CVSS 3.1 vector
-#'
-#' @param vector A CVSS 3.1 vector string.
-#' @return A list containing the original vector, numeric score, and severity.
-#' @keywords internal
-parse_cvss31 <- function(vector) {
-  score <- cvss31_score(vector)
-
-  list(
-    severity = cvss31_severity(score),
-    score = score,
-    vector = vector
-  )
 }

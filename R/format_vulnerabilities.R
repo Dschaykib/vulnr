@@ -5,10 +5,17 @@
 #' @param refs Character vector of source paths referenced by the findings.
 #' @return A list with `summary` and `details` strings, or a single clean-result
 #'   string when there are no findings.
+#' @examples
+#' format_vulnerabilities()
+#' @export
 #' @keywords internal
-format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
-  stopifnot(is.data.frame(x) || is.null(x))
-  stopifnot(is.logical(group), length(group) == 1L, !is.na(group))
+format_vulnerabilities <- function(x = NULL, group = TRUE, refs = NULL) {
+  stopifnot(
+    is.data.frame(x) || is.null(x),
+    is.logical(group),
+    length(group) == 1L,
+    !is.na(group)
+  )
 
   if (is.null(x) || nrow(x) == 0L) {
     return("No known vulnerabilities found.")
@@ -17,13 +24,12 @@ format_vulnerabilities <- function(x = NULL, group = TRUE, refs = c()) {
   used_cols <- c("package", "installed", "upstream", "score",
                  "severity", "fix", "ref")
   if (!all(used_cols %in% names(x))) {
-    stop(
-      paste0(
-        "Input is missing columns: '",
-        paste0(base::setdiff(used_cols, names(x)), collapse = "', '"),
-        "'"
-      )
+    msg <- paste0(
+      "Input is missing columns: '",
+      paste0(base::setdiff(used_cols, names(x)), collapse = "', '"),
+      "'"
     )
+    stop(msg)
   }
 
   x$severity[is.na(x$severity)] <- "UNKNOWN"

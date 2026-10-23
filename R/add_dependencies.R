@@ -6,6 +6,12 @@
 #' @param data Data frame containing a `Package` column.
 #' @return A data table containing the input packages and their dependencies.
 #'
+#' @examples
+#' \dontrun{
+#' add_dependencies(data.frame(Package = "jsonlite"))
+#' }
+#'
+#' @export
 #' @keywords internal
 #' @importFrom tools package_dependencies
 #' @import data.table
@@ -26,9 +32,6 @@ add_dependencies <- function(data) {
     which = "strong"
   )
 
-
-  # TODO function to check a pkg on CRAN
-  # TODO check a package given a DESCRIPTION file
   dep_list <- vector(mode = "list", length = length(pkg))
   names(dep_list) <- pkg
   i_pkg <- pkg[1]

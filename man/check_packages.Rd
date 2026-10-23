@@ -15,4 +15,9 @@ A data table of vulnerabilities and severity information, or `NULL`.
 \description{
 Query OSV for package vulnerabilities
 }
+\examples{
+\dontrun{
+check_packages(data.frame(Package = "jsonlite", Version = "1.8.0"))
+}
+}
 \keyword{internal}

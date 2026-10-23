@@ -15,4 +15,9 @@ A data table with identifiers, CVSS scores, and severity labels.
 \description{
 Retrieve CVSS severity for vulnerability identifiers
 }
+\examples{
+\dontrun{
+get_severity("CVE-2024-99999")
+}
+}
 \keyword{internal}

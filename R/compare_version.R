@@ -4,6 +4,10 @@
 #' @param y Version constraint using `>`, `>=`, `<`, `<=`, `=` or `==`.
 #' @return A logical value indicating whether `x` satisfies `y`.
 #'
+#' @examples
+#' compare_version("1.2.3", ">= 1.0.0")
+#'
+#' @export
 #' @keywords internal
 #' @importFrom utils compareVersion
 compare_version <- function(x, y) {

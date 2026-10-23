@@ -2,7 +2,15 @@
 #'
 #' @param resc_dt Data table of OSV result identifiers.
 #' @return A data table linking packages to upstream vulnerability identifiers.
+#' @examples
+#' \dontrun{
+#' get_cveid(data.table::data.table(
+#'   package = "jsonlite", installed = "1.8.0", id = "OSV-EXAMPLE",
+#'   fix = NA_character_
+#' ))
+#' }
 #' @importFrom data.table rbindlist
+#' @export
 #' @keywords internal
 get_cveid <- function(resc_dt) {
 

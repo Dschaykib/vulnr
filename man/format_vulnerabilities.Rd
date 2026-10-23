@@ -4,7 +4,7 @@
 \alias{format_vulnerabilities}
 \title{Format vulnerability findings for display}
 \usage{
-format_vulnerabilities(x = NULL, group = TRUE, refs = c())
+format_vulnerabilities(x = NULL, group = TRUE, refs = NULL)
 }
 \arguments{
 \item{x}{Data frame containing vulnerability findings.}
@@ -19,5 +19,8 @@ A list with `summary` and `details` strings, or a single clean-result
 }
 \description{
 Format vulnerability findings for display
+}
+\examples{
+format_vulnerabilities()
 }
 \keyword{internal}

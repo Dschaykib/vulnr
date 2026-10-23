@@ -2,8 +2,13 @@
 #'
 #' @param renv_file Character vector of paths to `renv.lock` files.
 #' @return A data frame containing package names, versions, source, and path.
+#' @examples
+#' \dontrun{
+#' parse_renv_lock("renv.lock")
+#' }
 #' @importFrom data.table data.table rbindlist
 #' @importFrom jsonlite fromJSON
+#' @export
 #' @keywords internal
 parse_renv_lock <- function(renv_file = "renv.lock") {
 

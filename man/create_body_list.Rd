@@ -17,4 +17,7 @@ A list suitable for the OSV batch query endpoint, or `NULL`.
 \description{
 Create a batch OSV query body
 }
+\examples{
+create_body_list("jsonlite", "1.8.0")
+}
 \keyword{internal}
