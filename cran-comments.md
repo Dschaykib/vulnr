@@ -10,6 +10,12 @@ vulnerabilities using the OSV database.
   - Ubuntu latest (24.04.5)
   - macOS latest (26.6.2)
   - Windows latest (Microsoft Windows Server 2025, 10.0.26100)
+* tested with rhub Github actions for R-devel on
+  - linux
+  - m1-san
+  - macos
+  - macos-arm64
+  - windows
 
 ## R CMD check results
 

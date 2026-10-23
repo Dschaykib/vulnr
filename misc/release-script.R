@@ -11,6 +11,9 @@
 # renv::install("r-lib/revdepcheck")
 
 
+# create github issues with a checklist
+usethis::use_release_issue()
+
 #.rs.restartR()
 #source("misc/update_DESCRIPTION_NEWS.R")
 rm(list = ls())
@@ -89,9 +92,13 @@ devtools::check_win_devel()
 # takes a while to get
 # results$cran_summary()
 
-
+rhub::rhub_setup()
+rhub::rhub_doctor()
+# use with 1,2,3,4,5 -> check platforms and use all VM with R versions
+rhub::rhub_check()
 
 # RELEASE -----------------------------------------------------------------
 
+
 # starts a set of questions to prepare for release and submits at the end
-devtools::release()
+devtools::submit_cran()
