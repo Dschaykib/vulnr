@@ -35,10 +35,14 @@ unlink("NEWS.md")
   # Set the version
   my_desc$set_version("0.0.0.9000")
   # The title of your package
-  my_desc$set(Title = "Vulnerability Scans")
+  my_desc$set(Title = "Scan R Packages for Vulnerabilities")
   # The description of your package
-  my_desc$set(Description =
-                paste0("Scan R projects for vulnerabilities."))
+  my_desc$set(
+    Description = paste0(
+      "Scan R package dependencies for known security vulnerabilities using ",
+      "the OSV database, with support for renv.lock, installed libraries, ",
+      "and user-supplied package versions.")
+    )
   # The urls
   my_desc$set("URL", "https://github.com/Dschaykib/vulnr")
   my_desc$set("BugReports",
@@ -48,11 +52,13 @@ unlink("NEWS.md")
   #Set authors
   my_desc$set("Authors@R",
               paste0("person('Jakob', 'Gepp',",
-                     "email = 'jakob.gepp@yahoo.com',",
-                     "role = c('cre', 'aut'))"))
+                     "email = 'jakob.gepp@yahoo.de',",
+                     "role = c('cre', 'aut', 'cph'))"))
 
   # set R version
-  my_desc$set_dep("R", type = desc::dep_types[2], version = ">= 4.5")
+  # commented because no specific reason at the moment
+  # would need more tests to verify which R version is the lowest
+  # my_desc$set_dep("R", type = desc::dep_types[2], version = ">= 4.5")
 
   # set suggests desc::dep_types[3]
   my_desc$set_dep("testthat", type = desc::dep_types[3], version = "*")

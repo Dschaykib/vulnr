@@ -11,3 +11,4 @@ renv-lockfiles/
 
 ^\.lintr$
 ^LICENSE\.md$
+^cran-comments\.md$
