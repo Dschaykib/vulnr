@@ -81,11 +81,13 @@ devtools::check_win_devel()
 
 # Check for CRAN specific requirements using rhub and save it in the results
 # objects
-results <- rhub::check_for_cran()
+# deprecated, use GHA or rhubv2
+# results <- rhub::check_for_cran()
+# rhub::rhub_platforms()
 
 # Get the summary of your results
 # takes a while to get
-results$cran_summary()
+# results$cran_summary()
 
 
 

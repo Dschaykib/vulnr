@@ -132,6 +132,11 @@ unlink("NEWS.md")
     "change default values for renv.lock and lib to NULL"
   ))
 
+  my_desc$bump_version("minor")
+  my_news$add_version(my_desc$get_version())
+  my_news$add_bullet(c(
+    "CRAN release"
+  ))
 }
 
 
