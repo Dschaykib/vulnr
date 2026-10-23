@@ -6,6 +6,7 @@
 
 misc/
 badges/
+revdep/
 renv-lockfiles/
 
 ^\.lintr$

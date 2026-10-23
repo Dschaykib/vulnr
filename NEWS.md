@@ -1,3 +1,10 @@
+## version 0.0.3
+
+---
+
+- prepare for CRAN release
+- change default values for renv.lock and lib to NULL
+
 ## version 0.0.2.9001
 
 ---
@@ -31,7 +38,7 @@
 ---
 
 - adding newsmd for easier creation of NEWS.md file
-- inital package setup
+- initial package setup
 
 ## version 0.0.0.9000
 

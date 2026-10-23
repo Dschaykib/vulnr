@@ -15,4 +15,9 @@ A data frame of installed packages and their source paths.
 \description{
 Parse installed packages from library paths
 }
+\examples{
+\dontrun{
+parse_library(.libPaths()[1])
+}
+}
 \keyword{internal}

@@ -4,8 +4,13 @@
 #' @param verb HTTP method, either `GET` or `POST`.
 #' @param body Optional request body, converted to JSON for `POST` requests.
 #' @return The parsed API response.
+#' @examples
+#' \dontrun{
+#' api_request("https://api.osv.dev/v1/vulns/RUSTSEC-2020-0001")
+#' }
 #' @import httr
 #' @importFrom jsonlite toJSON
+#' @export
 #' @keywords internal
 api_request <- function(url,
                         verb = c("GET", "POST"),

@@ -2,7 +2,12 @@
 #'
 #' @param lib Character vector of existing library paths.
 #' @return A data frame of installed packages and their source paths.
+#' @examples
+#' \dontrun{
+#' parse_library(.libPaths()[1])
+#' }
 #' @importFrom utils installed.packages
+#' @export
 #' @keywords internal
 parse_library <- function(lib = .libPaths()) {
 

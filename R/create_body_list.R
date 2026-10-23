@@ -3,6 +3,9 @@
 #' @param pkg Character vector of package names.
 #' @param version Optional character vector of package versions.
 #' @return A list suitable for the OSV batch query endpoint, or `NULL`.
+#' @examples
+#' create_body_list("jsonlite", "1.8.0")
+#' @export
 #' @keywords internal
 create_body_list <- function(pkg = NULL, version = NULL) {
 
@@ -11,7 +14,7 @@ create_body_list <- function(pkg = NULL, version = NULL) {
     return(NULL)
   }
 
-  if (any(is.na(pkg)) || any(pkg == "")) {
+  if (anyNA(pkg) || any(pkg == "")) {
     stop("pkg should not contain missing or empty values")
   }
 

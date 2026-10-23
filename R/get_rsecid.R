@@ -3,7 +3,15 @@
 #' @param body_list Batch query body used to create `results`.
 #' @param results Parsed OSV batch results.
 #' @return A data table of packages, installed versions, and OSV identifiers.
+#' @examples
+#' get_rsecid(
+#'   body_list = list(queries = list(
+#'     list(package = list(name = "jsonlite"), version = NULL)
+#'   )),
+#'   results = list(list())
+#' )
 #' @importFrom data.table data.table rbindlist
+#' @export
 #' @keywords internal
 get_rsecid <- function(body_list, results) {
 
@@ -30,7 +38,7 @@ get_rsecid <- function(body_list, results) {
     resc_list[[i_res]] <- data.table::data.table(
       package = this_pkg,
       installed = this_version,
-      id = sapply(results[[i_res]]$vulns, function(x) x$id),
+      id = unlist(lapply(results[[i_res]]$vulns, function(x) x$id)),
       fix = NA_character_
     )
   }

@@ -6,8 +6,8 @@
 \usage{
 check(
   data = NULL,
-  renv_file = "renv.lock",
-  lib = .libPaths(),
+  renv_file = NULL,
+  lib = NULL,
   dcf = NULL,
   error_level = "LOW",
   group = TRUE,
@@ -16,12 +16,13 @@ check(
 )
 }
 \arguments{
-\item{data}{Optional data frame with `Package` and `Version` columns.}
+\item{data}{Optional data frame with `Package` and `Version` columns or a
+vector with  package names.}
 
 \item{renv_file}{Path to an `renv.lock` file, or `NULL` to skip it.}
 
-\item{lib}{Character vector of library paths, or `NULL` to skip
-installed libraries.}
+\item{lib}{Character vector of library paths, or `NULL` to skip installed
+libraries.}
 
 \item{dcf}{Path to a DESCRIPTION file, or `NULL` to skip it.}
 
@@ -43,4 +44,14 @@ Invisibly returns `NULL` by default. If `return_cves` is `TRUE`,
 \description{
 Scans explicitly supplied package data, an `renv.lock` file, and installed
 libraries, then queries the OSV database for known vulnerabilities.
+}
+\examples{
+# check specific packages
+check(data = "data.table")
+
+\dontrun{
+# check a renv.lock file
+check(renv_file = "renv.lock")
+}
+
 }

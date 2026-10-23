@@ -4,6 +4,9 @@
 #' @param version Optional package version.
 #' @param eco Package ecosystem, defaulting to `CRAN`.
 #' @return A list representing one OSV query.
+#' @examples
+#' set_query("jsonlite", "1.8.0")
+#' @export
 #' @keywords internal
 set_query <- function(pkg, version = NULL, eco = "CRAN") {
 

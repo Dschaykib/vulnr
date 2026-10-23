@@ -2,7 +2,12 @@
 #'
 #' @param check_data Data frame containing `Package` and `Version` columns.
 #' @return A data table of vulnerabilities and severity information, or `NULL`.
+#' @examples
+#' \dontrun{
+#' check_packages(data.frame(Package = "jsonlite", Version = "1.8.0"))
+#' }
 #' @import data.table
+#' @export
 #' @keywords internal
 check_packages <- function(check_data) {
 

@@ -1,7 +1,7 @@
 Package: vulnr
 Title: Vulnerability Scans
-Version: 0.0.2.9001
-Date: 2026-10-07
+Version: 0.0.3
+Date: 2026-10-23
 Authors@R: 
     person("Jakob", "Gepp", , "jakob.gepp@yahoo.com", role = c("cre", "aut"))
 Description: Scan R projects for vulnerabilities.
@@ -19,5 +19,5 @@ Imports:
     utils
 Suggests: 
     testthat
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 Encoding: UTF-8

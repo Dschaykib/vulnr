@@ -63,7 +63,7 @@ unlink("NEWS.md")
   my_news$add_version(my_desc$get_version())
 
   my_news$add_bullet(c("adding newsmd for easier creation of NEWS.md file",
-                       "inital package setup"))
+                       "initial package setup"))
 
   my_desc$set_dep("data.table", type = desc::dep_types[1], version = "*")
   my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = "*")
@@ -113,6 +113,18 @@ unlink("NEWS.md")
   # set min version to avoid CVE
   my_desc$set_dep("jsonlite", type = desc::dep_types[1], version = ">= 1.8.8")
   my_desc$set_dep("tools", type = desc::dep_types[1], version = "*")
+
+
+
+  # pkg build fixes for CRAN ------------------------------------------------
+
+  my_desc$bump_version("patch")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "prepare for CRAN release",
+    "change default values for renv.lock and lib to NULL"
+  ))
 
 }
 

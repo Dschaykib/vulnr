@@ -15,4 +15,9 @@ A data frame containing package names, versions, source, and path.
 \description{
 Parse package records from renv lock files
 }
+\examples{
+\dontrun{
+parse_renv_lock("renv.lock")
+}
+}
 \keyword{internal}

@@ -17,4 +17,12 @@ A data table of packages, installed versions, and OSV identifiers.
 \description{
 Extract vulnerability identifiers from OSV results
 }
+\examples{
+get_rsecid(
+  body_list = list(queries = list(
+    list(package = list(name = "jsonlite"), version = NULL)
+  )),
+  results = list(list())
+)
+}
 \keyword{internal}

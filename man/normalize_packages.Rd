@@ -18,4 +18,7 @@ A normalized data frame with `Package`, `Version`, `source`,
 \description{
 Normalize package data
 }
+\examples{
+normalize_packages(c("jsonlite", "httr"))
+}
 \keyword{internal}

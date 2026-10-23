@@ -16,4 +16,10 @@ A data table containing the input packages and their dependencies.
 Resolves strong recursive dependencies from the latest CRAN metadata and
 appends dependencies that are not already present in `data`.
 }
+\examples{
+\dontrun{
+add_dependencies(data.frame(Package = "jsonlite"))
+}
+
+}
 \keyword{internal}

@@ -19,4 +19,7 @@ A list representing one OSV query.
 \description{
 Build an OSV package query
 }
+\examples{
+set_query("jsonlite", "1.8.0")
+}
 \keyword{internal}

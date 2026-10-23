@@ -3,10 +3,11 @@
 #' Scans explicitly supplied package data, an `renv.lock` file, and installed
 #' libraries, then queries the OSV database for known vulnerabilities.
 #'
-#' @param data Optional data frame with `Package` and `Version` columns.
+#' @param data Optional data frame with `Package` and `Version` columns or a
+#'   vector with  package names.
 #' @param renv_file Path to an `renv.lock` file, or `NULL` to skip it.
-#' @param lib Character vector of library paths, or `NULL` to skip
-#' installed libraries.
+#' @param lib Character vector of library paths, or `NULL` to skip installed
+#'   libraries.
 #' @param dcf Path to a DESCRIPTION file, or `NULL` to skip it.
 #' @param error_level Minimum severity that causes an error. One of `CRITICAL`,
 #'   `HIGH`, `MEDIUM`, or `LOW`.
@@ -21,17 +22,24 @@
 #'
 #' @importFrom data.table rbindlist
 #' @export
-check <- function(
-  data = NULL,
-  # TODO make NULL the default?
-  renv_file = "renv.lock",
-  lib = .libPaths(),
-  dcf = NULL,
-  error_level = "LOW",
-  group = TRUE,
-  return_cves = FALSE,
-  dependencies = FALSE
-) {
+#'
+#' @examples
+#' # check specific packages
+#' check(data = "data.table")
+#'
+#' \dontrun{
+#' # check a renv.lock file
+#' check(renv_file = "renv.lock")
+#' }
+#'
+check <- function(data = NULL,
+                  renv_file = NULL,
+                  lib = NULL,
+                  dcf = NULL,
+                  error_level = "LOW",
+                  group = TRUE,
+                  return_cves = FALSE,
+                  dependencies = FALSE) {
 
 
   # including for package build notes
@@ -40,17 +48,16 @@ check <- function(
   # validate inputs
   severity_levels <- c("CRITICAL", "HIGH", "MEDIUM", "LOW")
   if (length(error_level) != 1L || !error_level %in% severity_levels) {
-    stop(
-      paste0(
-        "'error_level' must be one of: ",
-        paste0(severity_levels, collapse = ", ")
-      )
+    msg <- paste0(
+      "'error_level' must be one of: ",
+      paste0(severity_levels, collapse = ", ")
     )
+    stop(msg)
   }
 
-  if (!is.logical(return_cves) ||
-      length(return_cves) != 1L ||
-      is.na(return_cves)) {
+  if (!is.logical(return_cves)
+      || length(return_cves) != 1L
+      || is.na(return_cves)) {
     stop("'return_cves' must be a single non-missing logical value")
   }
 

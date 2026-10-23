@@ -9,6 +9,11 @@
 #'
 #' @param file Character vector of existing DESCRIPTION file paths.
 #' @return A data table with `Package`, `Version`, `source`, and `path`.
+#' @examples
+#' \dontrun{
+#' parse_dcf("DESCRIPTION")
+#' }
+#' @export
 #' @keywords internal
 parse_dcf <- function(file = "DESCRIPTION") {
 
@@ -37,11 +42,11 @@ parse_dcf <- function(file = "DESCRIPTION") {
 
 
   versions <- ifelse(
-    grepl("\\(", packages),
-    sub("^.*\\((.*)\\)$", "\\1", packages),
+    grepl("(", packages, fixed = TRUE),
+    sub("^.*\\((.*)\\)$", "\\1", packages, fixed = FALSE),
     NA_character_
   )
-  versions <- gsub("\\\n", " ", versions)
+  versions <- gsub("\n", " ", versions, fixed = TRUE)
 
   out <- data.table::data.table(
     Package = package_names,

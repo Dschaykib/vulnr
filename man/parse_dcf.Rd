@@ -20,4 +20,9 @@ package, excluding the base R dependency.
 For the output, the source is set to 'DESCRIPTION' and the path are the
 packages that depend on it.
 }
+\examples{
+\dontrun{
+parse_dcf("DESCRIPTION")
+}
+}
 \keyword{internal}

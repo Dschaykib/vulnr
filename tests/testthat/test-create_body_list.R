@@ -66,7 +66,7 @@ testthat::test_that("create_body_list handles missing pkg", {
     "contain missing or empty values"
   )
   testthat::expect_error(
-    create_body_list(pkg = c(NA_character_)),
+    create_body_list(pkg = NA_character_),
     "contain missing or empty values"
   )
 
@@ -86,7 +86,7 @@ testthat::test_that("create_body_list handles different lengths inputs", {
   )
 
   testthat::expect_error(
-    create_body_list(pkg = c("foo", "bar"), version = c("1")),
+    create_body_list(pkg = c("foo", "bar"), version = "1"),
     "same length"
   )
 

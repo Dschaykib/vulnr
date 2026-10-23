@@ -17,4 +17,8 @@ A logical value indicating whether `x` satisfies `y`.
 \description{
 Compare a package version with a constraint
 }
+\examples{
+compare_version("1.2.3", ">= 1.0.0")
+
+}
 \keyword{internal}
