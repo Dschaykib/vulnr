@@ -134,6 +134,17 @@ unlink("NEWS.md")
 
   # pkg build fixes for CRAN ------------------------------------------------
 
+  my_desc$bump_version("minor")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "CRAN release"
+  ))
+
+
+
+  # pkg build fixes for CRAN ------------------------------------------------
+
   my_desc$bump_version("patch")
   my_news$add_version(my_desc$get_version())
 

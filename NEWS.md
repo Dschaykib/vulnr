@@ -1,8 +1,14 @@
-## version 0.0.4
+## version 0.1.1
 
 ---
 
 - fix osv link in description
+
+## version 0.1.0
+
+---
+
+- CRAN release
 
 ## version 0.0.3
 
