@@ -40,7 +40,7 @@ unlink("NEWS.md")
   my_desc$set(
     Description = paste0(
       "Scan R package dependencies for known security vulnerabilities using ",
-      "the OSV database, with support for renv.lock, installed libraries, ",
+      "the OSV database <https://osv.dev/>, with support for renv.lock, installed libraries, ",
       "and user-supplied package versions.")
     )
   # The urls
@@ -132,6 +132,14 @@ unlink("NEWS.md")
     "change default values for renv.lock and lib to NULL"
   ))
 
+  # pkg build fixes for CRAN ------------------------------------------------
+
+  my_desc$bump_version("patch")
+  my_news$add_version(my_desc$get_version())
+
+  my_news$add_bullet(c(
+    "fix osv link in description"
+  ))
 }
 
 
