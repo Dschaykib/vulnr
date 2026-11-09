@@ -1,10 +1,11 @@
-# vulnr - 0.1.0 <img src="misc/logo.png" width=170 align="right" />
+# vulnr - 0.1.1 <img src="misc/logo.png" width=170 align="right" />
 
 | branch        | main | dev  |
 | ------------- | ------ | ---- |
 | R CMD check   | [![main-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | [![dev-build](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/r-cmd-check-fix.yml) | |
 | test coverage | [![main-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/main.svg)](https://app.codecov.io/gh/Dschaykib/vulnr/tree/main) | [![dev-test-coverage](https://img.shields.io/codecov/c/github/Dschaykib/vulnr/dev.svg)](https://app.codecov.io/gh/Dschaykib/vulnr/tree/dev) |
 | lints         | [![main-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=main)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) | [![dev-lints](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml/badge.svg?branch=dev)](https://github.com/Dschaykib/vulnr/actions/workflows/lints.yml) |
+| CRAN          | [![CRAN](https://www.r-pkg.org/badges/version/vulnr)](https://cran.r-project.org/web/packages/vulnr/index.html) | ![DevVersion](https://img.shields.io/badge/Version-0.1.1-success) |
 | vulnerabilities | [![main vulnerabilities](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Dschaykib/vulnr/main/badges/vulnerabilities-main.json)](https://github.com/Dschaykib/vulnr/blob/main/badges/vulnerabilities-main.json) | [![dev vulnerabilities](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Dschaykib/vulnr/dev/badges/vulnerabilities-dev.json)](https://github.com/Dschaykib/vulnr/blob/dev/badges/vulnerabilities-dev.json) |
 
 ----
