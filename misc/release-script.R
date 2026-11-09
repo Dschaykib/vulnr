@@ -11,6 +11,9 @@
 # renv::install("r-lib/revdepcheck")
 
 
+# create github issues with a checklist
+usethis::use_release_issue()
+
 #.rs.restartR()
 #source("misc/update_DESCRIPTION_NEWS.R")
 rm(list = ls())
@@ -81,15 +84,21 @@ devtools::check_win_devel()
 
 # Check for CRAN specific requirements using rhub and save it in the results
 # objects
-results <- rhub::check_for_cran()
+# deprecated, use GHA or rhubv2
+# results <- rhub::check_for_cran()
+# rhub::rhub_platforms()
 
 # Get the summary of your results
 # takes a while to get
-results$cran_summary()
+# results$cran_summary()
 
-
+rhub::rhub_setup()
+rhub::rhub_doctor()
+# use with 1,2,3,4,5 -> check platforms and use all VM with R versions
+rhub::rhub_check()
 
 # RELEASE -----------------------------------------------------------------
 
+
 # starts a set of questions to prepare for release and submits at the end
-devtools::release()
+devtools::submit_cran()
